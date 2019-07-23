@@ -32,9 +32,12 @@ import io.astueben.moonshiners.handler.ConfigurationHandler;
 import io.astueben.moonshiners.proxy.IProxy;
 import io.astueben.moonshiners.reference.Reference;
 import io.astueben.moonshiners.register.RegisterBlocks;
+import io.astueben.moonshiners.register.RegisterGenerators;
 import io.astueben.moonshiners.register.RegisterItems;
 import io.astueben.moonshiners.utility.LogHelper;
 import net.minecraft.init.Blocks;
+
+import java.util.Random;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES, acceptedMinecraftVersions = Reference.MOD_MINECRAFT_VERSION, canBeDeactivated = true, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class Moonshiners
@@ -70,6 +73,9 @@ public class Moonshiners
         LogHelper.info("registering blocks");
         RegisterBlocks.Ores();
         RegisterBlocks.Blocks();
+
+        LogHelper.info("registering ore generators");
+        RegisterGenerators.oreGen();
 
         LogHelper.info("preInitialization complete");
     }
