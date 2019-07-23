@@ -28,6 +28,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import io.astueben.moonshiners.handler.ConfigurationHandler;
 import io.astueben.moonshiners.proxy.IProxy;
 import io.astueben.moonshiners.reference.Reference;
+import io.astueben.moonshiners.register.RegisterBlocks;
+import io.astueben.moonshiners.register.RegisterItems;
 import io.astueben.moonshiners.utility.LogHelper;
 import net.minecraft.init.Blocks;
 
@@ -42,11 +44,21 @@ public class Moonshiners
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+
+        LogHelper.info("preInitialization started");
+
+        LogHelper.info("reading config file");
         String configDir = event.getModConfigurationDirectory().toString();
         ConfigurationHandler.init(configDir);
         FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
 
         //TODO: implement UpdateCheck
+
+        LogHelper.info("registering items");
+        RegisterItems.Ingots();
+
+        LogHelper.info("registering blocks");
+        RegisterBlocks.Ores();
 
         LogHelper.info("preInitialization complete");
     }
