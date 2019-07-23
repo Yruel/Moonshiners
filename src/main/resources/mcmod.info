@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "modid": "moonshiners",
+  "name": "§9Moonshiners",
+  "description": "You ever wanted to distill your own alcohol? Then this mod is the perfect one to start!",
+  "version": "§a${version}",
+  "mcversion": "§a${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["§5Alexander Stüben"],
+  "credits": "Me",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

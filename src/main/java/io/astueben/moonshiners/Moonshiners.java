@@ -19,20 +19,48 @@
 
 package io.astueben.moonshiners;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import io.astueben.moonshiners.handler.ConfigurationHandler;
+import io.astueben.moonshiners.proxy.IProxy;
+import io.astueben.moonshiners.reference.Reference;
+import io.astueben.moonshiners.utility.LogHelper;
 import net.minecraft.init.Blocks;
 
-@Mod(modid = Moonshiners.MODID, version = Moonshiners.VERSION)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES, acceptedMinecraftVersions = Reference.MOD_MINECRAFT_VERSION, canBeDeactivated = true, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class Moonshiners
 {
-    public static final String MODID = "examplemod";
-    public static final String VERSION = "1.0";
+    @Mod.Instance(Reference.MOD_ID)
+    public static Moonshiners instance = new Moonshiners();
+
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
+    public static IProxy proxy;
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public static void preInit(FMLPreInitializationEvent event) {
+        String configDir = event.getModConfigurationDirectory().toString();
+        ConfigurationHandler.init(configDir);
+        FMLCommonHandler.instance().bus().register(new ConfigurationHandler());
+
+        //TODO: implement UpdateCheck
+
+        LogHelper.info("preInitialization complete");
+    }
+
+    @Mod.EventHandler
+    public static void init(FMLInitializationEvent event) {
+        LogHelper.info("Initialization complete");
+
         // some example code
         System.out.println("DIRT BLOCK >> "+ Blocks.dirt.getUnlocalizedName());
+    }
+
+    @Mod.EventHandler
+    public static void postInit(FMLPostInitializationEvent event) {
+        LogHelper.info("postInitialization complete");
     }
 }
