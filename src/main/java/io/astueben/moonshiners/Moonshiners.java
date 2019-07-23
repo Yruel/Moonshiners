@@ -67,6 +67,7 @@ public class Moonshiners
 
         LogHelper.info("registering blocks");
         RegisterBlocks.Ores();
+        RegisterBlocks.Blocks();
 
         LogHelper.info("preInitialization complete");
     }

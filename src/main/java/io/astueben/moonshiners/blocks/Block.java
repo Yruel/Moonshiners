@@ -17,17 +17,22 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.astueben.moonshiners.register;
+package io.astueben.moonshiners.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import io.astueben.moonshiners.blocks.base.BaseItemBlock;
-import io.astueben.moonshiners.init.InitBlocks;
+import io.astueben.moonshiners.blocks.base.BaseBlock;
+import net.minecraft.block.material.Material;
 
-public class RegisterBlocks {
-    public static void Ores() {
-        GameRegistry.registerBlock(InitBlocks.copper_ore, BaseItemBlock.class, "copper_ore");
+public class Block extends BaseBlock {
+
+    public Block(String unlocalizedName, Material material, float hardness, float resistance) {
+        super(unlocalizedName, material, hardness, resistance);
     }
-    public static void Blocks() {
-        GameRegistry.registerBlock(InitBlocks.copper_block, BaseItemBlock.class, "copper_block");
+
+    public Block(String unlocalizedName) {
+        super(unlocalizedName);
+    }
+
+    public Block(String unlocalizedName, float hardness, float resistance) {
+        super(unlocalizedName, hardness, resistance);
     }
 }

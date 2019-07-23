@@ -1,80 +1,34 @@
-[16:12:32] [main/INFO]: Setting user: Player778
-[16:12:33] [Client thread/INFO]: LWJGL Version: 2.9.1
-[16:12:34] [Client thread/ERROR]: Couldn't initialize twitch stream
-[16:12:40] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:§9Moonshiners
-[16:12:41] [Sound Library Loader/INFO]: Sound engine started
-[16:12:41] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
-[16:12:41] [Client thread/INFO]: Created: 16x16 textures/items-atlas
-[16:12:41] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:§9Moonshiners
-[16:12:41] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
-[16:12:41] [Client thread/INFO]: Created: 256x256 textures/items-atlas
-[16:12:42] [Sound Library Loader/INFO]: Sound engine started
-[16:13:01] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
-[16:13:01] [Server thread/INFO]: Generating keypair
-[16:13:01] [Server thread/INFO]: Preparing start region for level 0
-[16:13:02] [Server thread/INFO]: Changing view distance to 12, from 10
-[16:13:02] [Server thread/INFO]: Player778[local:E:86eb24de] logged in with entity id 319 at (127.6547181775689, 65.0, 133.62358626690008)
-[16:13:02] [Server thread/INFO]: Player778 joined the game
-[16:13:13] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:14] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:18] [Server thread/INFO]: [Player778: Given [item.moonshiners:copper_pickaxe.name] * 1 to Player778]
-[16:13:18] [Client thread/INFO]: [CHAT] Given [item.moonshiners:copper_pickaxe.name] * 1 to Player778
-[16:13:25] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:26] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:27] [Server thread/INFO]: [Player778: Given [item.moonshiners:copper_hoe.name] * 1 to Player778]
-[16:13:27] [Client thread/INFO]: [CHAT] Given [item.moonshiners:copper_hoe.name] * 1 to Player778
-[16:13:31] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:31] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:32] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:33] [Server thread/INFO]: [Player778: Given [item.moonshiners:copper_axe.name] * 1 to Player778]
-[16:13:33] [Client thread/INFO]: [CHAT] Given [item.moonshiners:copper_axe.name] * 1 to Player778
-[16:13:37] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:37] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:37] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:38] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:38] [Server thread/INFO]: [Player778: Given [item.moonshiners:copper_sword.name] * 1 to Player778]
-[16:13:38] [Client thread/INFO]: [CHAT] Given [item.moonshiners:copper_sword.name] * 1 to Player778
-[16:13:41] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:41] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:42] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:42] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:43] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:44] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:45] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:46] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:46] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:47] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:47] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:47] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:48] [Client thread/INFO]: [CHAT] moonshiners:copper_pickaxe, moonshiners:copper_hoe, moonshiners:copper_axe, moonshiners:copper_sword, moonshiners:copper_ore, moonshiners:copper_shovel, moonshiners:copper_ingot
-[16:13:48] [Server thread/INFO]: [Player778: Given [item.moonshiners:copper_shovel.name] * 1 to Player778]
-[16:13:48] [Client thread/INFO]: [CHAT] Given [item.moonshiners:copper_shovel.name] * 1 to Player778
-[16:13:52] [Server thread/INFO]: Player778 has just earned the achievement [Taking Inventory]
-[16:13:52] [Client thread/INFO]: [CHAT] Player778 has just earned the achievement [Taking Inventory]
-[16:14:02] [Server thread/INFO]: Saving and pausing game...
-[16:14:02] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[16:14:02] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[16:14:02] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[16:14:06] [Server thread/INFO]: Saving and pausing game...
-[16:14:06] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[16:14:06] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[16:14:06] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[16:14:07] [Server thread/INFO]: Saving and pausing game...
-[16:14:07] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[16:14:07] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[16:14:07] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[16:16:46] [Server thread/INFO]: Saving and pausing game...
-[16:16:46] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[16:16:46] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[16:16:46] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[16:17:28] [Server thread/INFO]: Saving and pausing game...
-[16:17:28] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[16:17:28] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[16:17:28] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[16:17:29] [Server thread/INFO]: Stopping server
-[16:17:29] [Server thread/INFO]: Saving players
-[16:17:29] [Server thread/INFO]: Saving worlds
-[16:17:29] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[16:17:29] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[16:17:29] [Server thread/INFO]: Saving chunks for level 'New World'/The End
-[16:17:30] [Client thread/INFO]: Stopping!
+[16:52:03] [main/INFO]: Setting user: Player678
+[16:52:05] [Client thread/INFO]: LWJGL Version: 2.9.1
+[16:52:05] [Client thread/ERROR]: Couldn't initialize twitch stream
+[16:52:11] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:§9Moonshiners
+[16:52:12] [Sound Library Loader/INFO]: Sound engine started
+[16:52:12] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
+[16:52:12] [Client thread/INFO]: Created: 16x16 textures/items-atlas
+[16:52:12] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:§9Moonshiners
+[16:52:12] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
+[16:52:12] [Client thread/INFO]: Created: 256x256 textures/items-atlas
+[16:52:13] [Sound Library Loader/INFO]: Sound engine started
+[16:52:17] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[16:52:17] [Server thread/INFO]: Generating keypair
+[16:52:17] [Server thread/INFO]: Preparing start region for level 0
+[16:52:18] [Server thread/INFO]: Changing view distance to 12, from 10
+[16:52:18] [Server thread/INFO]: Player678[local:E:eda01121] logged in with entity id 265 at (128.69999998807907, 65.0, 134.13550751210485)
+[16:52:18] [Server thread/INFO]: Player678 joined the game
+[16:52:19] [Server thread/INFO]: Player678 has just earned the achievement [Taking Inventory]
+[16:52:19] [Client thread/INFO]: [CHAT] Player678 has just earned the achievement [Taking Inventory]
+[16:53:07] [Server thread/INFO]: Saving and pausing game...
+[16:53:07] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[16:53:07] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[16:53:07] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[16:53:30] [Server thread/INFO]: Saving and pausing game...
+[16:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[16:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[16:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[16:53:30] [Server thread/INFO]: Stopping server
+[16:53:30] [Server thread/INFO]: Saving players
+[16:53:30] [Server thread/INFO]: Saving worlds
+[16:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[16:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[16:53:30] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[16:53:32] [Client thread/INFO]: Stopping!
