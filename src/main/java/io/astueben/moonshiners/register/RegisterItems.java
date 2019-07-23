@@ -27,4 +27,24 @@ public class RegisterItems {
     public static void Ingots() {
         GameRegistry.registerItem(ingotCopper, "copper_ingot");
     }
+
+    public static void Swords() {
+        GameRegistry.registerItem(swordCopper, "copper_sword");
+    }
+
+    public static void Axes() {
+        GameRegistry.registerItem(axeCopper, "copper_axe");
+    }
+
+    public static void Pickaxes() {
+        GameRegistry.registerItem(pickaxeCopper, "copper_pickaxe");
+    }
+
+    public static void Spades() {
+        GameRegistry.registerItem(spadeCopper, "copper_shovel");
+    }
+
+    public static void Hoes() {
+        GameRegistry.registerItem(hoeCopper, "copper_hoe");
+    }
 }

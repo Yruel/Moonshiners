@@ -17,20 +17,11 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.astueben.moonshiners.blocks.base;
+package io.astueben.moonshiners.enums;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.util.EnumHelper;
 
-public class BaseItemBlock extends ItemBlock {
-    public BaseItemBlock(Block block) {
-        super(block);
-    }
-
-    @Override
-    public String getItemStackDisplayName(ItemStack itemStack) {
-        return (StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(itemStack) + ".name"));
-    }
+public class ToolMaterial {
+    public static final Item.ToolMaterial toolMaterialCopper = EnumHelper.addToolMaterial("toolMaterielCopper", 1, 200, 5.0F, 1.5F, 10);
 }

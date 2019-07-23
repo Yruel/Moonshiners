@@ -25,6 +25,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import io.astueben.moonshiners.crafting.Smelting;
 import io.astueben.moonshiners.handler.ConfigurationHandler;
 import io.astueben.moonshiners.proxy.IProxy;
 import io.astueben.moonshiners.reference.Reference;
@@ -57,6 +58,13 @@ public class Moonshiners
         LogHelper.info("registering items");
         RegisterItems.Ingots();
 
+        LogHelper.info("registering tools");
+        RegisterItems.Swords();
+        RegisterItems.Spades();
+        RegisterItems.Axes();
+        RegisterItems.Pickaxes();
+        RegisterItems.Hoes();
+
         LogHelper.info("registering blocks");
         RegisterBlocks.Ores();
 
@@ -65,10 +73,13 @@ public class Moonshiners
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        LogHelper.info("Initialization complete");
 
-        // some example code
-        System.out.println("DIRT BLOCK >> "+ Blocks.dirt.getUnlocalizedName());
+        LogHelper.info("initialization started");
+
+        LogHelper.info("registering smelting recipes");
+        Smelting.smelting();
+
+        LogHelper.info("initialization complete");
     }
 
     @Mod.EventHandler

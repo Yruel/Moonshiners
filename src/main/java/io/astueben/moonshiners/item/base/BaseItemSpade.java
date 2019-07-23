@@ -24,14 +24,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 import io.astueben.moonshiners.creativetab.MoonshinersTab;
 import io.astueben.moonshiners.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.StatCollector;
 
-public class BaseItem extends Item {
+public class BaseItemSpade extends ItemSpade {
 
-    public BaseItem(String unlocalizedName) {
-        super();
+    public BaseItemSpade(String unlocalizedName, ToolMaterial toolMaterial) {
+        super(toolMaterial);
         this.setUnlocalizedName(unlocalizedName);
         this.setCreativeTab(MoonshinersTab.moonshinersTab);
     }

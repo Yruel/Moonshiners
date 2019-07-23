@@ -17,20 +17,7 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.astueben.moonshiners.blocks.base;
+package io.astueben.moonshiners.crafting;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-
-public class BaseItemBlock extends ItemBlock {
-    public BaseItemBlock(Block block) {
-        super(block);
-    }
-
-    @Override
-    public String getItemStackDisplayName(ItemStack itemStack) {
-        return (StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(itemStack) + ".name"));
-    }
+public class ShapelessCrafting {
 }

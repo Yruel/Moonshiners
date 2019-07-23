@@ -17,20 +17,18 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.astueben.moonshiners.blocks.base;
+package io.astueben.moonshiners.creativetab;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import io.astueben.moonshiners.init.InitBlocks;
+import io.astueben.moonshiners.reference.Reference;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
-public class BaseItemBlock extends ItemBlock {
-    public BaseItemBlock(Block block) {
-        super(block);
-    }
-
-    @Override
-    public String getItemStackDisplayName(ItemStack itemStack) {
-        return (StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(itemStack) + ".name"));
-    }
+public class MoonshinersTab {
+    public static final CreativeTabs moonshinersTab = new CreativeTabs(Reference.MOD_ID.toLowerCase() + ":moonshiners.name") {
+        @Override
+        public Item getTabIconItem() {
+            return Item.getItemFromBlock(InitBlocks.copper_ore);
+        }
+    };
 }

@@ -26,12 +26,13 @@ import io.astueben.moonshiners.reference.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.StatCollector;
 
-public class BaseItem extends Item {
+public class BaseItemSword extends ItemSword {
 
-    public BaseItem(String unlocalizedName) {
-        super();
+    public BaseItemSword(String unlocalizedName, ToolMaterial toolMaterial) {
+        super(toolMaterial);
         this.setUnlocalizedName(unlocalizedName);
         this.setCreativeTab(MoonshinersTab.moonshinersTab);
     }

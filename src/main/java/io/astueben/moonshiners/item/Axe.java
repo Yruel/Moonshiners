@@ -17,20 +17,13 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.astueben.moonshiners.blocks.base;
+package io.astueben.moonshiners.item;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import io.astueben.moonshiners.item.base.BaseItemAxe;
 
-public class BaseItemBlock extends ItemBlock {
-    public BaseItemBlock(Block block) {
-        super(block);
-    }
+public class Axe extends BaseItemAxe {
 
-    @Override
-    public String getItemStackDisplayName(ItemStack itemStack) {
-        return (StatCollector.translateToLocal(this.getUnlocalizedNameInefficiently(itemStack) + ".name"));
+    public Axe(String unlocalizedName, ToolMaterial toolMaterial) {
+        super(unlocalizedName, toolMaterial);
     }
 }

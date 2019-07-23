@@ -21,6 +21,7 @@ package io.astueben.moonshiners.blocks.base;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.astueben.moonshiners.creativetab.MoonshinersTab;
 import io.astueben.moonshiners.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -33,6 +34,7 @@ public class BaseBlock extends Block {
         this.setBlockName(unlocalizedName);
         this.setHardness(hardness);
         this.setResistance(resistance);
+        this.setCreativeTab(MoonshinersTab.moonshinersTab);
     }
 
     public BaseBlock(String unlocalizedName) {

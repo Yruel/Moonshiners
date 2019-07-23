@@ -19,9 +19,27 @@
 
 package io.astueben.moonshiners.init;
 
-import io.astueben.moonshiners.item.Ingot;
-import io.astueben.moonshiners.item.base.BaseItem;
+import io.astueben.moonshiners.enums.ToolMaterial;
+import io.astueben.moonshiners.item.*;
+import io.astueben.moonshiners.item.base.*;
 
 public class InitItems {
+    // ingots
     public static final BaseItem ingotCopper = new Ingot("copper_ingot");
+
+    // swords
+    public static final BaseItemSword swordCopper = new Sword("copper_sword", ToolMaterial.toolMaterialCopper);
+
+    // axes
+    public static final BaseItemAxe axeCopper = new Axe("copper_axe", ToolMaterial.toolMaterialCopper);
+
+    // spades
+    public static final BaseItemSpade spadeCopper = new Spade("copper_shovel", ToolMaterial.toolMaterialCopper);
+
+    // pickaxes
+    public static final BaseItemPickaxe pickaxeCopper = new Pickaxe("copper_pickaxe", ToolMaterial.toolMaterialCopper);
+
+    // hoes
+    public static final BaseItemHoe hoeCopper = new Hoe("copper_hoe", ToolMaterial.toolMaterialCopper);
+
 }
