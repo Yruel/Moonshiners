@@ -28,7 +28,7 @@ public class MoonshinersTab {
     public static final CreativeTabs moonshinersTab = new CreativeTabs(Reference.MOD_ID.toLowerCase() + ":moonshiners.name") {
         @Override
         public Item getTabIconItem() {
-            return Item.getItemFromBlock(InitBlocks.copper_ore);
+            return Item.getItemFromBlock(InitBlocks.oreCopper);
         }
     };
 }

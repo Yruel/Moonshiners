@@ -20,12 +20,13 @@
 package io.astueben.moonshiners.crafting;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import io.astueben.moonshiners.init.InitBlocks;
+import io.astueben.moonshiners.init.InitItems;
 import net.minecraft.item.ItemStack;
 
 public class ShapelessCrafting {
 
     public static void shapelessCrafting() {
-        // TODO: Crafting recipe for copper block
-        /*GameRegistry.addShapelessRecipe(new ItemStack());*/
+        GameRegistry.addShapelessRecipe(new ItemStack(InitItems.ingotCopper, 9), InitBlocks.blockCopper);
     }
 }

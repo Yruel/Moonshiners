@@ -25,9 +25,9 @@ import io.astueben.moonshiners.init.InitBlocks;
 
 public class RegisterBlocks {
     public static void Ores() {
-        GameRegistry.registerBlock(InitBlocks.copper_ore, BaseItemBlock.class, "copper_ore");
+        GameRegistry.registerBlock(InitBlocks.oreCopper, BaseItemBlock.class, "copper_ore");
     }
     public static void Blocks() {
-        GameRegistry.registerBlock(InitBlocks.copper_block, BaseItemBlock.class, "copper_block");
+        GameRegistry.registerBlock(InitBlocks.blockCopper, BaseItemBlock.class, "copper_block");
     }
 }

@@ -24,6 +24,6 @@ import io.astueben.moonshiners.blocks.Ore;
 import io.astueben.moonshiners.blocks.base.BaseBlock;
 
 public class InitBlocks {
-    public static final BaseBlock copper_ore = new Ore("copper_ore");
-    public static final BaseBlock copper_block = new Block("copper_block");
+    public static final BaseBlock oreCopper = new Ore("copper_ore");
+    public static final BaseBlock blockCopper = new Block("copper_block");
 }

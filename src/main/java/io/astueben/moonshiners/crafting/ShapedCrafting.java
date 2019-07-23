@@ -19,5 +19,20 @@
 
 package io.astueben.moonshiners.crafting;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import io.astueben.moonshiners.init.InitBlocks;
+import io.astueben.moonshiners.init.InitItems;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
 public class ShapedCrafting {
+    public static void shapedCrafting() {
+        GameRegistry.addShapedRecipe(new ItemStack(Item.getItemFromBlock(InitBlocks.blockCopper)),"III", "III", "III", 'I', InitItems.ingotCopper);
+        GameRegistry.addShapedRecipe(new ItemStack(InitItems.pickaxeCopper), "III", " S ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+        GameRegistry.addShapedRecipe(new ItemStack(InitItems.axeCopper), "II ", "IS ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+        GameRegistry.addShapedRecipe(new ItemStack(InitItems.hoeCopper), "II ", " S ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+        GameRegistry.addShapedRecipe(new ItemStack(InitItems.spadeCopper), " I ", " S ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+        GameRegistry.addShapedRecipe(new ItemStack(InitItems.swordCopper), " I ", " I ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+    }
 }

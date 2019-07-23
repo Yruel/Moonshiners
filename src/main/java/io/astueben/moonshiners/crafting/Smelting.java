@@ -26,6 +26,6 @@ import net.minecraft.item.ItemStack;
 
 public class Smelting {
     public static void smelting() {
-        GameRegistry.addSmelting(InitBlocks.copper_ore, new ItemStack(InitItems.ingotCopper), 0.7F);
+        GameRegistry.addSmelting(InitBlocks.oreCopper, new ItemStack(InitItems.ingotCopper), 0.7F);
     }
 }

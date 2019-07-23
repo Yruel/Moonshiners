@@ -25,6 +25,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import io.astueben.moonshiners.crafting.ShapedCrafting;
+import io.astueben.moonshiners.crafting.ShapelessCrafting;
 import io.astueben.moonshiners.crafting.Smelting;
 import io.astueben.moonshiners.handler.ConfigurationHandler;
 import io.astueben.moonshiners.proxy.IProxy;
@@ -79,6 +81,12 @@ public class Moonshiners
 
         LogHelper.info("registering smelting recipes");
         Smelting.smelting();
+
+        LogHelper.info("registering shapeless crafting recipes");
+        ShapelessCrafting.shapelessCrafting();
+
+        LogHelper.info("registering shaped crafting recipes");
+        ShapedCrafting.shapedCrafting();
 
         LogHelper.info("initialization complete");
     }
