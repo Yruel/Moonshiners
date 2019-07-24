@@ -4,7 +4,7 @@
 Time: 23.07.19 18:52
 Description: There was a severe problem during mod loading that has caused the game to fail
 
-cpw.mods.fml.common.LoaderException: java.lang.IllegalArgumentException: The name moonshiners:oreCopper has been registered twice, for io.astueben.moonshiners.blocks.Ore@682d8f82 and io.astueben.moonshiners.blocks.Block@516edacb.
+cpw.mods.fml.common.LoaderException: java.lang.IllegalArgumentException: The name moonshiners:oreCopper has been registered twice, for io.astueben.moonshiners.blocks.Ore@682d8f82 and io.astueben.moonshiners.blocks.Blocks@516edacb.
 	at cpw.mods.fml.common.registry.GameRegistry.registerBlock(GameRegistry.java:239)
 	at cpw.mods.fml.common.registry.GameRegistry.registerBlock(GameRegistry.java:188)
 	at io.astueben.moonshiners.register.RegisterBlocks.Blocks(RegisterBlocks.java:31)
@@ -48,7 +48,7 @@ cpw.mods.fml.common.LoaderException: java.lang.IllegalArgumentException: The nam
 	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
 	at net.minecraftforge.gradle.GradleStartCommon.launch(Unknown Source)
 	at GradleStart.main(Unknown Source)
-Caused by: java.lang.IllegalArgumentException: The name moonshiners:oreCopper has been registered twice, for io.astueben.moonshiners.blocks.Ore@682d8f82 and io.astueben.moonshiners.blocks.Block@516edacb.
+Caused by: java.lang.IllegalArgumentException: The name moonshiners:oreCopper has been registered twice, for io.astueben.moonshiners.blocks.Ore@682d8f82 and io.astueben.moonshiners.blocks.Blocks@516edacb.
 	at cpw.mods.fml.common.registry.FMLControlledNamespacedRegistry.add(FMLControlledNamespacedRegistry.java:410)
 	at cpw.mods.fml.common.registry.GameData.registerBlock(GameData.java:894)
 	at cpw.mods.fml.common.registry.GameData.registerBlock(GameData.java:869)

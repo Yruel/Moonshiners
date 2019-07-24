@@ -29,5 +29,6 @@ public class RegisterBlocks {
     }
     public static void Blocks() {
         GameRegistry.registerBlock(InitBlocks.blockCopper, BaseItemBlock.class, "copper_block");
+        GameRegistry.registerBlock(InitBlocks.fermentMachine, BaseItemBlock.class, "ferment_machine");
     }
 }

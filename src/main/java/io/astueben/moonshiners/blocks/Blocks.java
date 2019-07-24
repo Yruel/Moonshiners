@@ -22,17 +22,17 @@ package io.astueben.moonshiners.blocks;
 import io.astueben.moonshiners.blocks.base.BaseBlock;
 import net.minecraft.block.material.Material;
 
-public class Block extends BaseBlock {
+public class Blocks extends BaseBlock {
 
-    public Block(String unlocalizedName, Material material, float hardness, float resistance) {
+    public Blocks(String unlocalizedName, Material material, float hardness, float resistance) {
         super(unlocalizedName, material, hardness, resistance);
     }
 
-    public Block(String unlocalizedName) {
+    public Blocks(String unlocalizedName) {
         super(unlocalizedName);
     }
 
-    public Block(String unlocalizedName, float hardness, float resistance) {
+    public Blocks(String unlocalizedName, float hardness, float resistance) {
         super(unlocalizedName, hardness, resistance);
     }
 }

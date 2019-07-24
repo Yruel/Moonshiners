@@ -19,11 +19,13 @@
 
 package io.astueben.moonshiners.init;
 
-import io.astueben.moonshiners.blocks.Block;
+import io.astueben.moonshiners.blocks.Blocks;
+import io.astueben.moonshiners.blocks.FermentMachine;
 import io.astueben.moonshiners.blocks.Ore;
 import io.astueben.moonshiners.blocks.base.BaseBlock;
 
 public class InitBlocks {
     public static final BaseBlock oreCopper = new Ore("copper_ore");
-    public static final BaseBlock blockCopper = new Block("copper_block");
+    public static final BaseBlock blockCopper = new Blocks("copper_block");
+    public static final BaseBlock fermentMachine = new FermentMachine("ferment_machine");
 }
