@@ -25,7 +25,7 @@ import io.astueben.moonshiners.init.InitItems;
 import net.minecraft.item.ItemStack;
 
 public class Smelting {
-    public static void smelting() {
+    public static void SmeltingRecipes() {
         GameRegistry.addSmelting(InitBlocks.oreCopper, new ItemStack(InitItems.ingotCopper), 0.7F);
     }
 }

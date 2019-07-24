@@ -23,10 +23,15 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import io.astueben.moonshiners.init.InitBlocks;
 import io.astueben.moonshiners.init.InitItems;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ShapelessCrafting {
 
-    public static void shapelessCrafting() {
-        GameRegistry.addShapelessRecipe(new ItemStack(InitItems.ingotCopper, 9), InitBlocks.blockCopper);
+    public static void ShapelessRecipes() {
+        // GameRegistry.addShapelessRecipe(new ItemStack(InitItems.ingotCopper, 9), InitBlocks.blockCopper);
+    }
+
+    public static void ShapelessOreDictionaryRecipes() {
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(InitItems.ingotCopper, 9), "blockCopper"));
     }
 }

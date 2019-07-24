@@ -34,10 +34,8 @@ import io.astueben.moonshiners.reference.Reference;
 import io.astueben.moonshiners.register.RegisterBlocks;
 import io.astueben.moonshiners.register.RegisterGenerators;
 import io.astueben.moonshiners.register.RegisterItems;
+import io.astueben.moonshiners.register.RegisterOreDictionary;
 import io.astueben.moonshiners.utility.LogHelper;
-import net.minecraft.init.Blocks;
-
-import java.util.Random;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION, dependencies = Reference.MOD_DEPENDENCIES, acceptedMinecraftVersions = Reference.MOD_MINECRAFT_VERSION, canBeDeactivated = true, guiFactory = Reference.GUI_FACTORY_CLASS)
 public class Moonshiners
@@ -85,14 +83,21 @@ public class Moonshiners
 
         LogHelper.info("initialization started");
 
-        LogHelper.info("registering smelting recipes");
-        Smelting.smelting();
+        LogHelper.info("register ore dictionary");
+        RegisterOreDictionary.Blocks();
+        RegisterOreDictionary.Items();
+        RegisterOreDictionary.printOreDictionaryList();
+
+        LogHelper.info("registering SmeltingRecipes recipes");
+        Smelting.SmeltingRecipes();
 
         LogHelper.info("registering shapeless crafting recipes");
-        ShapelessCrafting.shapelessCrafting();
+        ShapelessCrafting.ShapelessRecipes();
+        ShapelessCrafting.ShapelessOreDictionaryRecipes();
 
         LogHelper.info("registering shaped crafting recipes");
-        ShapedCrafting.shapedCrafting();
+        ShapedCrafting.ShapedRecipes();
+        ShapedCrafting.ShapedOreDictionaryRecipes();
 
         LogHelper.info("initialization complete");
     }

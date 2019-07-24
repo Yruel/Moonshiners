@@ -25,14 +25,24 @@ import io.astueben.moonshiners.init.InitItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ShapedCrafting {
-    public static void shapedCrafting() {
-        GameRegistry.addShapedRecipe(new ItemStack(Item.getItemFromBlock(InitBlocks.blockCopper)),"III", "III", "III", 'I', InitItems.ingotCopper);
-        GameRegistry.addShapedRecipe(new ItemStack(InitItems.pickaxeCopper), "III", " S ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
-        GameRegistry.addShapedRecipe(new ItemStack(InitItems.axeCopper), "II ", "IS ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
-        GameRegistry.addShapedRecipe(new ItemStack(InitItems.hoeCopper), "II ", " S ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
-        GameRegistry.addShapedRecipe(new ItemStack(InitItems.spadeCopper), " I ", " S ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
-        GameRegistry.addShapedRecipe(new ItemStack(InitItems.swordCopper), " I ", " I ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+    public static void ShapedRecipes() {
+        // GameRegistry.addShapedRecipe(new ItemStack(Item.getItemFromBlock(InitBlocks.blockCopper)),"III", "III", "III", 'I', InitItems.ingotCopper);
+        // GameRegistry.addShapedRecipe(new ItemStack(InitItems.pickaxeCopper), "III", " S ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+        // GameRegistry.addShapedRecipe(new ItemStack(InitItems.axeCopper), "II ", "IS ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+        // GameRegistry.addShapedRecipe(new ItemStack(InitItems.hoeCopper), "II ", " S ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+        // GameRegistry.addShapedRecipe(new ItemStack(InitItems.spadeCopper), " I ", " S ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+        // GameRegistry.addShapedRecipe(new ItemStack(InitItems.swordCopper), " I ", " I ", " S ", 'I', InitItems.ingotCopper, 'S', Items.stick);
+    }
+
+    public static void ShapedOreDictionaryRecipes() {
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Item.getItemFromBlock(InitBlocks.blockCopper)), "III", "III", "III", 'I', "ingotCopper"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(InitItems.pickaxeCopper), "III", " S ", " S ", 'I', "ingotCopper", 'S', "stickWood"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(InitItems.axeCopper), "II ", "IS ", " S ", 'I', "ingotCopper", 'S', "stickWood"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(InitItems.hoeCopper), "II ", " S ", " S ", 'I', "ingotCopper", 'S', "stickWood"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(InitItems.spadeCopper), " I ", " S ", " S ", 'I', "ingotCopper", 'S', "stickWood"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(InitItems.swordCopper), " I ", " I ", " S ", 'I', "ingotCopper", 'S', "stickWood"));
     }
 }
