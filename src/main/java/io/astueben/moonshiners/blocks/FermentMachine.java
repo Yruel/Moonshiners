@@ -93,22 +93,51 @@ public class FermentMachine extends Blocks {
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemStack) {
+        Block block0 = world.getBlock(x, y, z - 1);
+        Block block1 = world.getBlock(x, y, z + 1);
+        Block block2 = world.getBlock(x - 1, y, z);
+        Block block3 = world.getBlock(x + 1, y, z);
+
+        byte side = 0;
+
         int direction = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (direction == 0) {
-            world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+            side = 2;
         }
 
         if (direction == 1) {
-            world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+            side = 5;
         }
 
         if (direction == 2) {
-            world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+            side = 3;
         }
 
         if (direction == 3) {
-            world.setBlockMetadataWithNotify(x, y, z, 4, 2);
+            side = 4;
+        }
+
+        if (block0 != this && block1 != this && block2 != this && block3 != this) {
+            world.setBlockMetadataWithNotify(x, y, z, side, 3);
+        } else {
+            if ((block0 == this || block1 == this) && (side == 4 || side == 5)) {
+                if (block0 == this) {
+                    world.setBlockMetadataWithNotify(x, y, z - 1, side, 3);
+                } else {
+                    world.setBlockMetadataWithNotify(x, y, z + 1, side, 3);
+                }
+                world.setBlockMetadataWithNotify(x, y, z, side, 3);
+            }
+
+            if ((block2 == this || block3 == this) && (side == 2 || side == 3)) {
+                if (block2 == this) {
+                    world.setBlockMetadataWithNotify(x - 1, y, z, side, 3);
+                } else {
+                    world.setBlockMetadataWithNotify(x + 1, y, z, side, 3);
+                }
+                world.setBlockMetadataWithNotify(x, y, z, side, 3);
+            }
         }
     }
 }
