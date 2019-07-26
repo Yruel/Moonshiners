@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "moonshiners",
+    "name": "Moonshiners",
+    "description": "You ever wanted to distill your own alcohol? Then this mod is the perfect one to start!",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["§5Alexander Stüben"],
+    "credits": "Me",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
