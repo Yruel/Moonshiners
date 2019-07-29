@@ -17,23 +17,19 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.proxy;
+package io.yruel.moonshiners.tab;
 
-import io.yruel.moonshiners.init.MoonshinersModels;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
-public class ClientProxy extends CommonProxy {
-    public void preInit(FMLPreInitializationEvent event) {
-        super.preInit(event);
-        MinecraftForge.EVENT_BUS.register(MoonshinersModels.class);
+public class CreativeTabMoonshiners extends CreativeTabs {
+    public CreativeTabMoonshiners() {
+        super("moonshiners");
     }
-    public void init(FMLInitializationEvent event) {
-        super.init(event);
-    }
-    public void postInit(FMLPostInitializationEvent event) {
-        super.postInit(event);
+
+    @Override
+    public ItemStack getTabIconItem() {
+        return new ItemStack(Items.BAKED_POTATO);
     }
 }

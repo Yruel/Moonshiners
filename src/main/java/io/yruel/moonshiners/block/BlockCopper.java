@@ -17,23 +17,17 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.proxy;
+package io.yruel.moonshiners.block;
 
-import io.yruel.moonshiners.init.MoonshinersModels;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import io.yruel.moonshiners.block.base.BaseBlock;
+import io.yruel.moonshiners.init.MoonshinersTabs;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 
-public class ClientProxy extends CommonProxy {
-    public void preInit(FMLPreInitializationEvent event) {
-        super.preInit(event);
-        MinecraftForge.EVENT_BUS.register(MoonshinersModels.class);
-    }
-    public void init(FMLInitializationEvent event) {
-        super.init(event);
-    }
-    public void postInit(FMLPostInitializationEvent event) {
-        super.postInit(event);
+public class BlockCopper extends BaseBlock {
+    public BlockCopper() {
+        super(Material.IRON, 5.0F, 10.0F);
+        setCreativeTab(MoonshinersTabs.tab);
+        setSoundType(SoundType.METAL);
     }
 }
