@@ -31,17 +31,17 @@ public class MoonshinersModels {
     public static void register(ModelRegistryEvent event) {
 
         // Item Models
-        register(MoonshinersItems.ingotCopper);
+        /*register(MoonshinersItems.ingotCopper);
         register(MoonshinersItems.itemPickaxeCopper);
         register(MoonshinersItems.itemCopperAxe);
         register(MoonshinersItems.itemCopperHoe);
         register(MoonshinersItems.itemCopperSpate);
-        register(MoonshinersItems.itemCopperSword);
+        register(MoonshinersItems.itemCopperSword);*/
 
         // Block Models
-        register(Item.getItemFromBlock(MoonshinersBlocks.blockCopper));
+        /*register(Item.getItemFromBlock(MoonshinersBlocks.blockCopper));
         register(Item.getItemFromBlock(MoonshinersBlocks.oreCopper));
-        register(Item.getItemFromBlock(MoonshinersBlocks.fermenter));
+        register(Item.getItemFromBlock(MoonshinersBlocks.fermenter));*/
     }
 
     private static void register(Item item) {

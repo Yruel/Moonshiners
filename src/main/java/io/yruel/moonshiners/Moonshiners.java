@@ -29,7 +29,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION/*, dependencies = Reference.DEPENDENCIES, acceptedMinecraftVersions = Reference.MINECRAFT_VERSION*/)
+@Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION, /*dependencies = Reference.DEPENDENCIES,*/ acceptedMinecraftVersions = Reference.MINECRAFT_VERSION)
 public class Moonshiners {
 
     @Instance

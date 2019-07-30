@@ -19,11 +19,13 @@
 
 package io.yruel.moonshiners.init;
 
+import io.yruel.moonshiners.block.BlockBase;
 import io.yruel.moonshiners.block.BlockCopper;
 import io.yruel.moonshiners.block.Fermenter;
 import io.yruel.moonshiners.block.OreCopper;
 import io.yruel.moonshiners.util.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
@@ -31,8 +33,16 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MoonshinersBlocks {
-    public static final BlockCopper blockCopper = new BlockCopper();
+
+    public static final List<Block> BLOCKS = new ArrayList<Block>();
+
+    public static final Block BLOCK_COPPER = new BlockBase("copper_block", Material.IRON);
+
+    /*public static final BlockCopper blockCopper = new BlockCopper();
     public static final OreCopper oreCopper = new OreCopper();
     public static final Fermenter fermenter = new Fermenter();
 
@@ -63,5 +73,5 @@ public class MoonshinersBlocks {
     public static void setName(Block block, String name) {
         block.setRegistryName(new ResourceLocation(Reference.ID, name));
         block.setUnlocalizedName(name);
-    }
+    }*/
 }

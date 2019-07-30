@@ -17,13 +17,18 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.init;
+package io.yruel.moonshiners.item;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import io.yruel.moonshiners.init.MoonshinersItems;
+import io.yruel.moonshiners.init.MoonshinersTabs;
+import net.minecraft.item.Item;
 
-public class MoonshinersSmelting {
-    public static void init() {
-        /*GameRegistry.addSmelting(MoonshinersBlocks.oreCopper, new ItemStack(MoonshinersItems.ingotCopper), 0.6F);*/
+public class ItemBase extends Item {
+    public ItemBase(String name) {
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setCreativeTab(MoonshinersTabs.tab);
+
+        MoonshinersItems.ITEMS.add(this);
     }
 }

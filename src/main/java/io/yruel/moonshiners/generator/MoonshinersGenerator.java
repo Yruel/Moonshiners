@@ -32,18 +32,18 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-public class MoonshinersGenerator implements IWorldGenerator {
+public class MoonshinersGenerator /* implements IWorldGenerator*/ {
 
-    private final WorldGenMinable moonshinersGenerator = new WorldGenMinable(MoonshinersBlocks.oreCopper.getDefaultState(), 5, (blockstate) -> blockstate.getBlock() == Blocks.STONE);
+    //private final WorldGenMinable moonshinersGenerator = new WorldGenMinable(MoonshinersBlocks.oreCopper.getDefaultState(), 5, (blockstate) -> blockstate.getBlock() == Blocks.STONE);
 
-    @Override
+   /* @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         BlockPos chunkPos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
 
         if (chunkGenerator instanceof ChunkGeneratorOverworld) {
             genOreCenterSpread(world, random, chunkPos, 15, moonshinersGenerator, 32, 32);
         }
-    }
+    }*/
 
     protected void genOreMinMax(World world, Random random, BlockPos chunkPos, int blockCount, WorldGenerator generator, int minHeight, int maxHeight) {
         if (maxHeight < minHeight) {

@@ -17,11 +17,19 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.enums;
+package io.yruel.moonshiners.tool;
 
-import net.minecraft.item.Item;
-import net.minecraftforge.common.util.EnumHelper;
+import io.yruel.moonshiners.init.MoonshinersItems;
+import io.yruel.moonshiners.init.MoonshinersTabs;
+import net.minecraft.item.ItemAxe;
 
-public class ToolMaterial {
-    public static final Item.ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 1, 200, 5.0F, 1.5F, 10);
+public class ToolAxe extends ItemAxe {
+    public ToolAxe(String name, ToolMaterial material, float damage, float speed) {
+        super(material, damage, speed);
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setCreativeTab(MoonshinersTabs.tab);
+
+        MoonshinersItems.ITEMS.add(this);
+    }
 }

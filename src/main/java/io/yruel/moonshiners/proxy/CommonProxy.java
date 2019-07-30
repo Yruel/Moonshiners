@@ -23,6 +23,7 @@ import io.yruel.moonshiners.generator.MoonshinersGenerator;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersSmelting;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -30,14 +31,15 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
+    public void registerItemRenderer(Item item, int meta, String id) {}
+
     public void preInit(FMLPreInitializationEvent event) {
-        MoonshinersItems.init();
-        MoonshinersBlocks.init();
+       /* MoonshinersBlocks.init();*/
 
-        MinecraftForge.EVENT_BUS.register(MoonshinersItems.class);
-        MinecraftForge.EVENT_BUS.register(MoonshinersBlocks.class);
+        /*MinecraftForge.EVENT_BUS.register(MoonshinersItems.class);
+        MinecraftForge.EVENT_BUS.register(MoonshinersBlocks.class);*/
 
-        GameRegistry.registerWorldGenerator(new MoonshinersGenerator(), 0);
+        /*GameRegistry.registerWorldGenerator(new MoonshinersGenerator(), 0);*/
     }
     public void init(FMLInitializationEvent event) {
         MoonshinersSmelting.init();
