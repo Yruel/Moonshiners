@@ -17,17 +17,18 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.block;
+package io.yruel.moonshiners.item.base;
 
-import io.yruel.moonshiners.block.base.BaseBlock;
+import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 
-public class OreCopper extends BaseBlock {
-    public OreCopper() {
-        super(Material.ROCK, 3.0F, 5.0F);
+public class ItemBase extends Item {
+    public ItemBase(String name) {
+        setUnlocalizedName(name);
+        setRegistryName(name);
         setCreativeTab(MoonshinersTabs.tab);
-        setSoundType(SoundType.STONE);
+
+        MoonshinersItems.ITEMS.add(this);
     }
 }

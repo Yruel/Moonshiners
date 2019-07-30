@@ -17,12 +17,24 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.item.base;
+package io.yruel.moonshiners.block.base;
 
-import net.minecraft.item.ItemHoe;
+import io.yruel.moonshiners.init.MoonshinersBlocks;
+import io.yruel.moonshiners.init.MoonshinersItems;
+import io.yruel.moonshiners.init.MoonshinersTabs;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
 
-public class BaseItemHoe extends ItemHoe {
-    public BaseItemHoe(ToolMaterial material) {
+public class BlockBase extends Block {
+
+    public BlockBase(String name, Material material) {
         super(material);
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setCreativeTab(MoonshinersTabs.tab);
+
+        MoonshinersBlocks.BLOCKS.add(this);
+        MoonshinersItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
     }
 }

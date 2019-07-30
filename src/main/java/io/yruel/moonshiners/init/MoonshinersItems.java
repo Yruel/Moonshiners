@@ -20,7 +20,7 @@
 package io.yruel.moonshiners.init;
 
 import io.yruel.moonshiners.armor.ArmorBase;
-import io.yruel.moonshiners.item.*;
+import io.yruel.moonshiners.item.base.ItemBase;
 import io.yruel.moonshiners.tool.*;
 import io.yruel.moonshiners.util.Reference;
 import net.minecraft.init.SoundEvents;
@@ -28,11 +28,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,38 +56,4 @@ public class MoonshinersItems {
     public static final Item COPPER_CHESTPLATE = new ArmorBase("copper_chestplate", ARMOR_COPPER, 1, EntityEquipmentSlot.CHEST);
     public static final Item COPPER_LEGGINGS = new ArmorBase("copper_leggings", ARMOR_COPPER, 2,EntityEquipmentSlot.LEGS);
     public static final Item COPPER_BOOTS = new ArmorBase("copper_boots", ARMOR_COPPER, 2, EntityEquipmentSlot.FEET);
-
-
-    /*public static final ItemCopperIngot ingotCopper = new ItemCopperIngot();
-    public static final ItemCopperPickaxe itemPickaxeCopper = new ItemCopperPickaxe(ToolMaterial.COPPER);
-    public static final ItemCopperAxe itemCopperAxe = new ItemCopperAxe(ToolMaterial.COPPER);
-    public static final ItemCopperHoe itemCopperHoe = new ItemCopperHoe(ToolMaterial.COPPER);
-    public static final ItemCopperSpate itemCopperSpate = new ItemCopperSpate(ToolMaterial.COPPER);
-    public static final ItemCopperSword itemCopperSword = new ItemCopperSword(ToolMaterial.COPPER);
-
-    public static void init() {
-        setName(ingotCopper, "copper_ingot");
-        setName(itemPickaxeCopper, "copper_pickaxe");
-        setName(itemCopperAxe, "copper_axe");
-        setName(itemCopperHoe, "copper_hoe");
-        setName(itemCopperSpate, "copper_shovel");
-        setName(itemCopperSword, "copper_sword");
-    }
-
-    @SubscribeEvent
-    public static void register(RegistryEvent.Register<Item> event) {
-        IForgeRegistry<Item> registry = event.getRegistry();
-
-        registry.register(ingotCopper);
-        registry.register(itemPickaxeCopper);
-        registry.register(itemCopperAxe);
-        registry.register(itemCopperHoe);
-        registry.register(itemCopperSpate);
-        registry.register(itemCopperSword);
-    }
-
-    public static void setName(Item item, String name) {
-        item.setRegistryName(new ResourceLocation(Reference.ID, name));
-        item.setUnlocalizedName(name);
-    }*/
 }

@@ -33,14 +33,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class CommonProxy {
     public void registerItemRenderer(Item item, int meta, String id) {}
 
-    public void preInit(FMLPreInitializationEvent event) {
-       /* MoonshinersBlocks.init();*/
-
-        /*MinecraftForge.EVENT_BUS.register(MoonshinersItems.class);
-        MinecraftForge.EVENT_BUS.register(MoonshinersBlocks.class);*/
-
-        /*GameRegistry.registerWorldGenerator(new MoonshinersGenerator(), 0);*/
-    }
+    public void preInit(FMLPreInitializationEvent event) {}
     public void init(FMLInitializationEvent event) {
         MoonshinersSmelting.init();
     }
