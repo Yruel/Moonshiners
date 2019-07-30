@@ -20,7 +20,6 @@
 package io.yruel.moonshiners.item;
 
 import io.yruel.moonshiners.init.MoonshinersTabs;
-import io.yruel.moonshiners.item.base.BaseItemPickaxe;
 import io.yruel.moonshiners.item.base.BaseItemSword;
 
 public class ItemCopperSword extends BaseItemSword {

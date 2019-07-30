@@ -41,6 +41,7 @@ public class MoonshinersModels {
         // Block Models
         register(Item.getItemFromBlock(MoonshinersBlocks.blockCopper));
         register(Item.getItemFromBlock(MoonshinersBlocks.oreCopper));
+        register(Item.getItemFromBlock(MoonshinersBlocks.fermenter));
     }
 
     private static void register(Item item) {

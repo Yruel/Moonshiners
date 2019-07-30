@@ -20,6 +20,7 @@
 package io.yruel.moonshiners.init;
 
 import io.yruel.moonshiners.block.BlockCopper;
+import io.yruel.moonshiners.block.Fermenter;
 import io.yruel.moonshiners.block.OreCopper;
 import io.yruel.moonshiners.util.Reference;
 import net.minecraft.block.Block;
@@ -33,10 +34,12 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class MoonshinersBlocks {
     public static final BlockCopper blockCopper = new BlockCopper();
     public static final OreCopper oreCopper = new OreCopper();
+    public static final Fermenter fermenter = new Fermenter();
 
     public static void init() {
         setName(blockCopper, "copper_block");
         setName(oreCopper, "copper_ore");
+        setName(fermenter, "fermenter");
     }
 
     @SubscribeEvent
@@ -45,6 +48,7 @@ public class MoonshinersBlocks {
 
         registry.register(blockCopper);
         registry.register(oreCopper);
+        registry.register(fermenter);
     }
 
     @SubscribeEvent
@@ -53,6 +57,7 @@ public class MoonshinersBlocks {
 
         registry.register(new ItemBlock(blockCopper).setRegistryName(blockCopper.getRegistryName()));
         registry.register(new ItemBlock(oreCopper).setRegistryName(oreCopper.getRegistryName()));
+        registry.register(new ItemBlock(fermenter).setRegistryName(fermenter.getRegistryName()));
     }
 
     public static void setName(Block block, String name) {

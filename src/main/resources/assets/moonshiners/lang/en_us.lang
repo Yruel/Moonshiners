@@ -12,3 +12,4 @@ item.copper_sword.name=Copper Sword
 # Blocks
 tile.copper_block.name=Copper Block
 tile.copper_ore.name=Copper Ore
+tile.fermenter.name=Fermenter

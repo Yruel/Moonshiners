@@ -21,7 +21,6 @@ package io.yruel.moonshiners.item;
 
 import io.yruel.moonshiners.init.MoonshinersTabs;
 import io.yruel.moonshiners.item.base.BaseItemHoe;
-import io.yruel.moonshiners.item.base.BaseItemPickaxe;
 
 public class ItemCopperHoe extends BaseItemHoe {
     public ItemCopperHoe(ToolMaterial material) {

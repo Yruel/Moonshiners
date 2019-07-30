@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "moonshiners:blocks/fermenter_main",
+    "front": "moonshiners:blocks/fermenter_front",
+    "side": "moonshiners:blocks/fermenter_main"
+  }
+}

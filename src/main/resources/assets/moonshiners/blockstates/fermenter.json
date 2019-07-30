@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "moonshiners:fermenter"
+    },
+    "facing=south": {
+      "model": "moonshiners:fermenter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "moonshiners:fermenter",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "moonshiners:fermenter",
+      "y": 90
+    },
+    "facing=up": {
+      "model": "moonshiners:fermenter",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "moonshiners:fermenter",
+      "x": 90
+    }
+  }
+}

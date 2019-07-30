@@ -19,6 +19,7 @@
 
 package io.yruel.moonshiners.proxy;
 
+import io.yruel.moonshiners.generator.MoonshinersGenerator;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersSmelting;
@@ -26,6 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
@@ -34,6 +36,8 @@ public class CommonProxy {
 
         MinecraftForge.EVENT_BUS.register(MoonshinersItems.class);
         MinecraftForge.EVENT_BUS.register(MoonshinersBlocks.class);
+
+        GameRegistry.registerWorldGenerator(new MoonshinersGenerator(), 0);
     }
     public void init(FMLInitializationEvent event) {
         MoonshinersSmelting.init();
