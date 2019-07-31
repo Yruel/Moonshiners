@@ -26,8 +26,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 @MethodsReturnNonnullByDefault
-public class ItemBlockVariants extends ItemBlock {
-    public ItemBlockVariants(Block block) {
+public class ItemBlockOreVariants extends ItemBlock {
+    public ItemBlockOreVariants(Block block) {
         super(block);
         setHasSubtypes(true);
         setMaxDamage(0);

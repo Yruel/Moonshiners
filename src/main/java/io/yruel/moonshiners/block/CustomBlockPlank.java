@@ -19,7 +19,8 @@
 
 package io.yruel.moonshiners.block;
 
-import io.yruel.moonshiners.block.item.ItemBlockVariants;
+import io.yruel.moonshiners.block.item.ItemBlockOreVariants;
+import io.yruel.moonshiners.block.item.ItemBlockPlanksVariants;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
@@ -59,7 +60,7 @@ public class CustomBlockPlank extends Block implements IMetaName {
         setDefaultState(this.getBlockState().getBaseState().withProperty(VARIANT, PlankType.JUNIPER));
 
         MoonshinersBlocks.BLOCKS.add(this);
-        MoonshinersItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+        MoonshinersItems.ITEMS.add(new ItemBlockPlanksVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Override
@@ -90,6 +91,6 @@ public class CustomBlockPlank extends Block implements IMetaName {
 
     @Override
     public String getSpecialName(ItemStack stack) {
-        return OreType.values()[stack.getItemDamage()].getName();
+        return PlankType.values()[stack.getItemDamage()].getName();
     }
 }

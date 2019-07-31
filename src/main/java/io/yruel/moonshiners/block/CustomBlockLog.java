@@ -19,7 +19,7 @@
 
 package io.yruel.moonshiners.block;
 
-import io.yruel.moonshiners.block.item.ItemBlockVariants;
+import io.yruel.moonshiners.block.item.ItemBlockOreVariants;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
@@ -29,7 +29,6 @@ import io.yruel.moonshiners.util.interfaces.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -58,7 +57,7 @@ public class CustomBlockLog extends BlockLog implements IMetaName {
         setDefaultState(this.getBlockState().getBaseState().withProperty(VARIANT, PlankType.JUNIPER));
 
         MoonshinersBlocks.BLOCKS.add(this);
-        MoonshinersItems.ITEMS.add(new ItemBlockVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+        MoonshinersItems.ITEMS.add(new ItemBlockOreVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Override

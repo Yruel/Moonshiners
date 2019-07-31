@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "variant=juniper": {
+      "model": "moonshiners:juniper_planks"
+    }
+  }
+}
