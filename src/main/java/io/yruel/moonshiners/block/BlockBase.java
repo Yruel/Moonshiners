@@ -17,19 +17,26 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.tool;
+package io.yruel.moonshiners.block;
 
+import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
-import net.minecraft.item.ItemSpade;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemBlock;
 
-public class ToolShovel extends ItemSpade {
-    public ToolShovel(String name, ToolMaterial material) {
+import java.util.Objects;
+
+public class BlockBase extends Block {
+
+    public BlockBase(String name, Material material) {
         super(material);
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(MoonshinersTabs.tab);
 
-        MoonshinersItems.ITEMS.add(this);
+        MoonshinersBlocks.BLOCKS.add(this);
+        MoonshinersItems.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 }

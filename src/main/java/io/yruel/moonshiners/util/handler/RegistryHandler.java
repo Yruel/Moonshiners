@@ -20,14 +20,19 @@
 package io.yruel.moonshiners.util.handler;
 
 import io.yruel.moonshiners.Moonshiners;
+import io.yruel.moonshiners.block.BlockOres;
+import io.yruel.moonshiners.block.item.ItemBlockVariants;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
+import io.yruel.moonshiners.util.enums.OreType;
+import io.yruel.moonshiners.world.generator.MoonshinersGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @EventBusSubscriber
 public class RegistryHandler {
@@ -45,11 +50,27 @@ public class RegistryHandler {
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
         for (Item item: MoonshinersItems.ITEMS) {
-            Moonshiners.proxy.registerItemRenderer(item, 0, "inventory");
+            if(item instanceof ItemBlockVariants) {
+                for (int i = 0; i < OreType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(item, i, OreType.values()[i].getName() + "_ore", "inventory");
+                }
+            } else {
+                Moonshiners.proxy.registerItemRenderer(item, 0, "inventory");
+            }
         }
 
         for (Block block : MoonshinersBlocks.BLOCKS) {
-            Moonshiners.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
+            if (block instanceof BlockOres) {
+                for (int i = 0; i < OreType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, OreType.values()[i].getName() + "_ore", "inventory");
+                }
+            } else {
+                Moonshiners.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
+            }
         }
+    }
+
+    public static void otherRegistries() {
+        GameRegistry.registerWorldGenerator(new MoonshinersGenerator(), 0);
     }
 }

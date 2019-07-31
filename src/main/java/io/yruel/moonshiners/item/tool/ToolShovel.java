@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Yruel (Alexander Stüben)
  *
- *  This file is part of Moonshiners
+ * This file is part of Moonshiners
  *
  * Moonshiners is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,19 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.proxy;
+package io.yruel.moonshiners.item.tool;
 
-public class ServerProxy extends CommonProxy {
+import io.yruel.moonshiners.init.MoonshinersItems;
+import io.yruel.moonshiners.init.MoonshinersTabs;
+import net.minecraft.item.ItemSpade;
+
+public class ToolShovel extends ItemSpade {
+    public ToolShovel(String name, ToolMaterial material) {
+        super(material);
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setCreativeTab(MoonshinersTabs.tab);
+
+        MoonshinersItems.ITEMS.add(this);
+    }
 }

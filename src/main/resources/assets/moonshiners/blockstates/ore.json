@@ -1,6 +1,6 @@
 {
   "variants": {
-    "normal": {
+    "variant=copper": {
       "model": "moonshiners:copper_ore"
     }
   }

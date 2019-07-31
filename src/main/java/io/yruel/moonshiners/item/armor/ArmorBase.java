@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Yruel (Alexander Stüben)
  *
- *  This file is part of Moonshiners
+ * This file is part of Moonshiners
  *
  * Moonshiners is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,14 +17,20 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.util;
+package io.yruel.moonshiners.item.armor;
 
-public class Reference {
-    public static final String ID = "moonshiners";
-    public static final String NAME = "Moonshiners";
-    public static final String VERSION = "0.0.1";
-    public static final String DEPENDENCIES = "required-after:Forge@[14.23.5.2838,)";
-    public static final String MINECRAFT_VERSION = "1.12.2";
-    public static final String CLIENT_PROXY_CLASS = "io.yruel.moonshiners.proxy.ClientProxy";
-    public static final String COMMON_PROXY_CLASS = "io.yruel.moonshiners.proxy.CommonProxy";
+import io.yruel.moonshiners.init.MoonshinersItems;
+import io.yruel.moonshiners.init.MoonshinersTabs;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemArmor;
+
+public class ArmorBase extends ItemArmor {
+    public ArmorBase(String name, ArmorMaterial material, int renderIndex, EntityEquipmentSlot equipmentSlot) {
+        super(material, renderIndex, equipmentSlot);
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setCreativeTab(MoonshinersTabs.tab);
+
+        MoonshinersItems.ITEMS.add(this);
+    }
 }

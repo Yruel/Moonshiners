@@ -17,21 +17,29 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.armor;
+package io.yruel.moonshiners.block.item;
 
-import io.yruel.moonshiners.init.MoonshinersItems;
-import io.yruel.moonshiners.init.MoonshinersTabs;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
+import io.yruel.moonshiners.util.interfaces.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 
-public class ArmorBase extends ItemArmor {
-    public ArmorBase(String name, ArmorMaterial material, int renderIndex, EntityEquipmentSlot equipmentSlot) {
-        super(material, renderIndex, equipmentSlot);
-        setUnlocalizedName(name);
-        setRegistryName(name);
-        setCreativeTab(MoonshinersTabs.tab);
+@MethodsReturnNonnullByDefault
+public class ItemBlockVariants extends ItemBlock {
+    public ItemBlockVariants(Block block) {
+        super(block);
+        setHasSubtypes(true);
+        setMaxDamage(0);
+    }
 
-        MoonshinersItems.ITEMS.add(this);
+    @Override
+    public int getMetadata(int damage) {
+        return damage;
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        return ((IMetaName)this.block).getSpecialName(stack) + "_" + super.getUnlocalizedName().substring(5);
     }
 }

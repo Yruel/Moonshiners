@@ -17,14 +17,14 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.tool;
+package io.yruel.moonshiners.item.tool;
 
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
-import net.minecraft.item.ItemPickaxe;
+import net.minecraft.item.ItemHoe;
 
-public class ToolPickaxe extends ItemPickaxe {
-    public ToolPickaxe(String name, ToolMaterial material) {
+public class ToolHoe extends ItemHoe {
+    public ToolHoe(String name, ToolMaterial material) {
         super(material);
         setUnlocalizedName(name);
         setRegistryName(name);

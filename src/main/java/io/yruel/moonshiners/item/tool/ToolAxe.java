@@ -17,24 +17,19 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.block.base;
+package io.yruel.moonshiners.item.tool;
 
-import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemAxe;
 
-public class BlockBase extends Block {
-
-    public BlockBase(String name, Material material) {
-        super(material);
+public class ToolAxe extends ItemAxe {
+    public ToolAxe(String name, ToolMaterial material, float damage, float speed) {
+        super(material, damage, speed);
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(MoonshinersTabs.tab);
 
-        MoonshinersBlocks.BLOCKS.add(this);
-        MoonshinersItems.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+        MoonshinersItems.ITEMS.add(this);
     }
 }

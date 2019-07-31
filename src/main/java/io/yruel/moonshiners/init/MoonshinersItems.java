@@ -19,9 +19,9 @@
 
 package io.yruel.moonshiners.init;
 
-import io.yruel.moonshiners.armor.ArmorBase;
+import io.yruel.moonshiners.item.armor.ArmorBase;
 import io.yruel.moonshiners.item.base.ItemBase;
-import io.yruel.moonshiners.tool.*;
+import io.yruel.moonshiners.item.tool.*;
 import io.yruel.moonshiners.util.Reference;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;

@@ -17,9 +17,12 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.generator;
+package io.yruel.moonshiners.world.generator;
 
+import io.yruel.moonshiners.block.BlockOres;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
+import io.yruel.moonshiners.util.enums.OreType;
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -32,18 +35,18 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-public class MoonshinersGenerator /* implements IWorldGenerator*/ {
+public class MoonshinersGenerator implements IWorldGenerator {
 
-    //private final WorldGenMinable moonshinersGenerator = new WorldGenMinable(MoonshinersBlocks.oreCopper.getDefaultState(), 5, (blockstate) -> blockstate.getBlock() == Blocks.STONE);
+    private final WorldGenMinable copperGeneratorOverworld = new WorldGenMinable(MoonshinersBlocks.BLOCK_ORE.getDefaultState().withProperty(BlockOres.VARIANT, OreType.COPPER), 9, BlockMatcher.forBlock(Blocks.AIR));
 
-   /* @Override
+    @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         BlockPos chunkPos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
 
         if (chunkGenerator instanceof ChunkGeneratorOverworld) {
-            genOreCenterSpread(world, random, chunkPos, 15, moonshinersGenerator, 32, 32);
+            genOreCenterSpread(world, random, chunkPos, 15, copperGeneratorOverworld, 32, 32);
         }
-    }*/
+    }
 
     protected void genOreMinMax(World world, Random random, BlockPos chunkPos, int blockCount, WorldGenerator generator, int minHeight, int maxHeight) {
         if (maxHeight < minHeight) {

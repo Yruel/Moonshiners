@@ -17,19 +17,10 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.tool;
+package io.yruel.moonshiners.util.interfaces;
 
-import io.yruel.moonshiners.init.MoonshinersItems;
-import io.yruel.moonshiners.init.MoonshinersTabs;
-import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemStack;
 
-public class ToolSword extends ItemSword {
-    public ToolSword(String name, ToolMaterial material) {
-        super(material);
-        setUnlocalizedName(name);
-        setRegistryName(name);
-        setCreativeTab(MoonshinersTabs.tab);
-
-        MoonshinersItems.ITEMS.add(this);
-    }
+public interface IMetaName {
+    public String getSpecialName(ItemStack stack);
 }

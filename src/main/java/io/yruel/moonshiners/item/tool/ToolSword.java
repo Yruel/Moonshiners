@@ -17,15 +17,15 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.tool;
+package io.yruel.moonshiners.item.tool;
 
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
-import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemSword;
 
-public class ToolAxe extends ItemAxe {
-    public ToolAxe(String name, ToolMaterial material, float damage, float speed) {
-        super(material, damage, speed);
+public class ToolSword extends ItemSword {
+    public ToolSword(String name, ToolMaterial material) {
+        super(material);
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(MoonshinersTabs.tab);

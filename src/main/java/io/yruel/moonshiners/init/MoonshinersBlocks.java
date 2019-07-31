@@ -19,7 +19,8 @@
 
 package io.yruel.moonshiners.init;
 
-import io.yruel.moonshiners.block.base.BlockBase;
+import io.yruel.moonshiners.block.BlockBase;
+import io.yruel.moonshiners.block.BlockOres;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
@@ -31,4 +32,5 @@ public class MoonshinersBlocks {
     public static final List<Block> BLOCKS = new ArrayList<Block>();
 
     public static final Block BLOCK_COPPER = new BlockBase("copper_block", Material.IRON);
+    public static final Block BLOCK_ORE = new BlockOres("ore");
 }
