@@ -40,6 +40,6 @@ public class ItemBlockOreVariants extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        return ((IMetaName)this.block).getSpecialName(stack) + "_" + super.getUnlocalizedName().substring(5);
+        return "tile." + ((IMetaName)this.block).getSpecialName(stack) + "_" + super.getUnlocalizedName().substring(5);
     }
 }
