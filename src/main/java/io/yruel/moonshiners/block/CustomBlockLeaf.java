@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019 Yruel (Alexander Stüben)
  *
- *  This file is part of Moonshiners
+ * This file is part of Moonshiners
  *
  * Moonshiners is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,24 +17,31 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.init;
+package io.yruel.moonshiners.block;
 
-import io.yruel.moonshiners.block.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 
-import java.util.ArrayList;
+import javax.annotation.Nonnull;
 import java.util.List;
 
-public class MoonshinersBlocks {
+public class CustomBlockLeaf extends BlockLeaves {
+    public CustomBlockLeaf(String name) {
+        super();
+    }
 
-    public static final List<Block> BLOCKS = new ArrayList<Block>();
+    @Override
+    public BlockPlanks.EnumType getWoodType(int meta) {
+        return null;
+    }
 
-    public static final Block BLOCK_COPPER = new BlockBase("copper_block", Material.IRON);
-    public static final Block BLOCK_ORE = new BlockOre("ore");
-
-    public static final Block BLOCK_PLANK = new CustomBlockPlank("plank");
-    public static final Block BLOCK_LOG = new CustomBlockLog("log");
-    public static final Block BLOCK_LEAVES = new CustomBlockLeaf("leaf");
-    public static final Block BLOCK_SAPLING = new CustomBlockSapling("sapling");
+    @Nonnull
+    @Override
+    public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+        return null;
+    }
 }

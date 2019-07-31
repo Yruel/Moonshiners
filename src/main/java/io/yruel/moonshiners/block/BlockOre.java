@@ -43,11 +43,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 @MethodsReturnNonnullByDefault
-public class BlockOres extends Block implements IMetaName {
+public class BlockOre extends Block implements IMetaName {
 
     public static final PropertyEnum<OreType> VARIANT = PropertyEnum.create("variant", OreType.class);
 
-    public BlockOres(String name) {
+    public BlockOre(String name) {
         super(Material.ROCK);
 
         setUnlocalizedName(name);

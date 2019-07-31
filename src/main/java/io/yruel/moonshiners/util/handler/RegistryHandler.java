@@ -20,7 +20,7 @@
 package io.yruel.moonshiners.util.handler;
 
 import io.yruel.moonshiners.Moonshiners;
-import io.yruel.moonshiners.block.BlockOres;
+import io.yruel.moonshiners.block.BlockOre;
 import io.yruel.moonshiners.block.item.ItemBlockVariants;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
@@ -60,7 +60,7 @@ public class RegistryHandler {
         }
 
         for (Block block : MoonshinersBlocks.BLOCKS) {
-            if (block instanceof BlockOres) {
+            if (block instanceof BlockOre) {
                 for (int i = 0; i < OreType.values().length; i++) {
                     Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, OreType.values()[i].getName() + "_ore", "inventory");
                 }

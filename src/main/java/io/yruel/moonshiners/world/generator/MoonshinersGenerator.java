@@ -19,7 +19,7 @@
 
 package io.yruel.moonshiners.world.generator;
 
-import io.yruel.moonshiners.block.BlockOres;
+import io.yruel.moonshiners.block.BlockOre;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.util.enums.OreType;
 import net.minecraft.block.state.pattern.BlockMatcher;
@@ -37,7 +37,7 @@ import java.util.Random;
 
 public class MoonshinersGenerator implements IWorldGenerator {
 
-    private final WorldGenMinable copperGeneratorOverworld = new WorldGenMinable(MoonshinersBlocks.BLOCK_ORE.getDefaultState().withProperty(BlockOres.VARIANT, OreType.COPPER), 9, BlockMatcher.forBlock(Blocks.AIR));
+    private final WorldGenMinable copperGeneratorOverworld = new WorldGenMinable(MoonshinersBlocks.BLOCK_ORE.getDefaultState().withProperty(BlockOre.VARIANT, OreType.COPPER), 9, BlockMatcher.forBlock(Blocks.AIR));
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
