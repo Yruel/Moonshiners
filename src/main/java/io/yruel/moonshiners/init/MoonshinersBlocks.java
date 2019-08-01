@@ -36,5 +36,5 @@ public class MoonshinersBlocks {
     public static final Block BLOCK_PLANKS = new CustomBlockPlanks("planks");
     public static final Block BLOCK_LOG = new CustomBlockLog("log");
     public static final Block BLOCK_LEAVES = new CustomBlockLeaves("leaves");
-   /* public static final Block BLOCK_SAPLING = new CustomBlockSapling("sapling");*/
+    public static final Block BLOCK_SAPLING = new CustomBlockSapling("sapling");
 }

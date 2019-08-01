@@ -20,14 +20,8 @@
 package io.yruel.moonshiners.util.handler;
 
 import io.yruel.moonshiners.Moonshiners;
-import io.yruel.moonshiners.block.BlockOre;
-import io.yruel.moonshiners.block.CustomBlockLeaves;
-import io.yruel.moonshiners.block.CustomBlockLog;
-import io.yruel.moonshiners.block.CustomBlockPlanks;
-import io.yruel.moonshiners.block.item.ItemBlockLeavesVariants;
-import io.yruel.moonshiners.block.item.ItemBlockLogVariants;
-import io.yruel.moonshiners.block.item.ItemBlockOreVariants;
-import io.yruel.moonshiners.block.item.ItemBlockPlanksVariants;
+import io.yruel.moonshiners.block.*;
+import io.yruel.moonshiners.block.item.*;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.util.enums.OreType;
@@ -73,7 +67,11 @@ public class RegistryHandler {
                 for (int i = 0; i < TreeType.values().length; i++) {
                     Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_leaves", "inventory");
                 }
-            }  else {
+            } else if (item instanceof ItemBlockSaplingVariants) {
+                for (int i = 0; i < TreeType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_sapling", "inventory");
+                }
+            } else {
                 Moonshiners.proxy.registerItemRenderer(item, 0, "inventory");
             }
         }
@@ -95,7 +93,11 @@ public class RegistryHandler {
                 for (int i = 0; i < TreeType.values().length; i++) {
                     Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_leaves", "inventory");
                 }
-            }  else {
+            } else if (block instanceof CustomBlockSapling) {
+                for (int i = 0; i < TreeType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_sapling", "inventory");
+                }
+            } else {
                 Moonshiners.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
             }
         }

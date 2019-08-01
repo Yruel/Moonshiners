@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "stage=0,variant=juniper": {
+      "model": "moonshiners:juniper_sapling"
+    },
+    "stage=1,variant=juniper": {
+      "model": "moonshiners:juniper_sapling"
+    }
+  }
+}

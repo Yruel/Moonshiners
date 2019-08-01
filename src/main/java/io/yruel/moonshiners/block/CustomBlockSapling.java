@@ -19,43 +19,173 @@
 
 package io.yruel.moonshiners.block;
 
+import io.yruel.moonshiners.block.item.ItemBlockSaplingVariants;
+import io.yruel.moonshiners.init.MoonshinersBlocks;
+import io.yruel.moonshiners.init.MoonshinersItems;
+import io.yruel.moonshiners.init.MoonshinersTabs;
+import io.yruel.moonshiners.util.enums.TreeType;
 import io.yruel.moonshiners.util.interfaces.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenBigTree;
+import net.minecraft.world.gen.feature.WorldGenTrees;
+import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.event.terraingen.TerrainGen;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Objects;
 import java.util.Random;
 
+@MethodsReturnNonnullByDefault
 public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaName {
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
+    protected static final AxisAlignedBB SAPLING_AABB = new AxisAlignedBB(0.09999999403953552D, 0.0D, 0.09999999403953552D, 0.8999999761581421D, 0.800000011920929D, 0.8999999761581421D);
 
-    public CustomBlockSapling(String sapling) {
-        super();
+    public static final PropertyEnum<TreeType> VARIANT = PropertyEnum.create("variant", TreeType.class);
+
+    public CustomBlockSapling(String name) {
+        setUnlocalizedName(name);
+        setRegistryName(name);
+        setCreativeTab(MoonshinersTabs.tab);
+        setSoundType(SoundType.PLANT);
+
+        this.setDefaultState(this.getBlockState().getBaseState().withProperty(VARIANT, TreeType.JUNIPER).withProperty(STAGE, 0));
+
+        MoonshinersBlocks.BLOCKS.add(this);
+        MoonshinersItems.ITEMS.add(new ItemBlockSaplingVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return SAPLING_AABB;
+    }
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return NULL_AABB;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        for (TreeType treeType: TreeType.values()) {
+            items.add(new ItemStack(this, 1, treeType.getMeta()));
+        }
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return state.getValue(VARIANT).getMeta();
     }
 
     @Override
     public String getSpecialName(ItemStack stack) {
-        return null;
+        return TreeType.values()[stack.getItemDamage()].getName();
     }
 
     @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState().withProperty(VARIANT, TreeType.byMetadata(0)).withProperty(STAGE, (meta & 8) >> 3);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        int i = 0;
+        i = i | state.getValue(VARIANT).getMeta();
+        i = i | state.getValue(STAGE) << 3;
+        return i;
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, VARIANT, STAGE);
+    }
+
+    @Override
+    @ParametersAreNonnullByDefault
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        return false;
+        return true;
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        return false;
+        return (double) worldIn.rand.nextFloat() < 0.45D;
     }
 
     @Override
-    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+    protected boolean canSustainBush(IBlockState state) {
+        return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.FARMLAND;
+    }
 
+    @Override
+    @ParametersAreNonnullByDefault
+    public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+        if (state.getValue(STAGE) == 0) {
+            worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
+        } else {
+            this.generateTree(worldIn, rand, pos, state);
+        }
+    }
+
+    public void generateTree(World world, Random random, BlockPos pos, IBlockState state) {
+        if(TerrainGen.saplingGrowTree(world, random, pos)) return;
+        WorldGenerator generator = random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
+        int i = 0, j = 0;
+        boolean flag = false;
+
+        switch (state.getValue(VARIANT)) {
+            case JUNIPER:
+                // generator = new MoonshinersJuniperTreeGenerator();
+                break;
+        }
+
+        IBlockState blockState = Blocks.AIR.getDefaultState();
+        if (flag) {
+            world.setBlockState(pos.add(0, 0, 0), blockState, 4);
+            world.setBlockState(pos.add(1, 0, 0), blockState, 4);
+            world.setBlockState(pos.add(0, 0, 1), blockState, 4);
+            world.setBlockState(pos.add(1, 0, 1), blockState, 4);
+        } else {
+            world.setBlockState(pos, blockState, 4);
+        }
+
+        if (!generator.generate(world, random, pos)) {
+            if (flag) {
+                world.setBlockState(pos.add(0, 0, 0), blockState, 4);
+                world.setBlockState(pos.add(1, 0, 0), blockState, 4);
+                world.setBlockState(pos.add(0, 0, 1), blockState, 4);
+                world.setBlockState(pos.add(1, 0, 1), blockState, 4);
+            } else {
+                world.setBlockState(pos, blockState, 4);
+            }
+        }
     }
 }
