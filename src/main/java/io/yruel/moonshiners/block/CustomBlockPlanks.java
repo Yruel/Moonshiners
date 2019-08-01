@@ -19,13 +19,11 @@
 
 package io.yruel.moonshiners.block;
 
-import io.yruel.moonshiners.block.item.ItemBlockOreVariants;
 import io.yruel.moonshiners.block.item.ItemBlockPlanksVariants;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
-import io.yruel.moonshiners.util.enums.OreType;
-import io.yruel.moonshiners.util.enums.PlankType;
+import io.yruel.moonshiners.util.enums.TreeType;
 import io.yruel.moonshiners.util.interfaces.IMetaName;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
@@ -34,9 +32,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -45,22 +45,31 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 @MethodsReturnNonnullByDefault
-public class CustomBlockPlank extends Block implements IMetaName {
-    public static final PropertyEnum<PlankType> VARIANT = PropertyEnum.create("variant", PlankType.class);
+public class CustomBlockPlanks extends Block implements IMetaName {
+    public static final PropertyEnum<TreeType> VARIANT = PropertyEnum.create("variant", TreeType.class);
 
-    public CustomBlockPlank(String name) {
+    public CustomBlockPlanks(String name) {
         super(Material.WOOD);
 
         setUnlocalizedName(name);
         setRegistryName(name);
         setCreativeTab(MoonshinersTabs.tab);
 
+        setHardness(2.0F);
+        setResistance(5.0F);
         setSoundType(SoundType.WOOD);
 
-        setDefaultState(this.getBlockState().getBaseState().withProperty(VARIANT, PlankType.JUNIPER));
+        setDefaultState(this.getBlockState().getBaseState().withProperty(VARIANT, TreeType.JUNIPER));
 
         MoonshinersBlocks.BLOCKS.add(this);
         MoonshinersItems.ITEMS.add(new ItemBlockPlanksVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+    }
+
+    @Override
+    public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        for (TreeType treeType : TreeType.values()) {
+            items.add(new ItemStack(this, 1, treeType.getMeta()));
+        }
     }
 
     @Override
@@ -80,7 +89,7 @@ public class CustomBlockPlank extends Block implements IMetaName {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(VARIANT, PlankType.byMetadata(meta));
+        return this.getDefaultState().withProperty(VARIANT, TreeType.byMetadata(meta));
     }
 
     @Override
@@ -91,6 +100,6 @@ public class CustomBlockPlank extends Block implements IMetaName {
 
     @Override
     public String getSpecialName(ItemStack stack) {
-        return PlankType.values()[stack.getItemDamage()].getName();
+        return TreeType.values()[stack.getItemDamage()].getName();
     }
 }

@@ -23,15 +23,15 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.util.IStringSerializable;
 
 @MethodsReturnNonnullByDefault
-public enum PlankType implements IStringSerializable {
+public enum TreeType implements IStringSerializable {
 
     JUNIPER(0, "juniper");
 
-    private static final PlankType[] META_LOOKUP = new PlankType[values().length];
+    private static final TreeType[] META_LOOKUP = new TreeType[values().length];
     private final int meta;
     private final String unlocalizedName;
 
-    PlankType(int meta, String unlocalizedName) {
+    TreeType(int meta, String unlocalizedName) {
         this.meta = meta;
         this.unlocalizedName = unlocalizedName;
     }
@@ -50,12 +50,12 @@ public enum PlankType implements IStringSerializable {
         return this.unlocalizedName;
     }
 
-    public static PlankType byMetadata(int meta) {
+    public static TreeType byMetadata(int meta) {
         return META_LOOKUP[meta];
     }
 
     static {
-        for (PlankType enumType : values()) {
+        for (TreeType enumType : values()) {
             META_LOOKUP[enumType.getMeta()] = enumType;
         }
     }

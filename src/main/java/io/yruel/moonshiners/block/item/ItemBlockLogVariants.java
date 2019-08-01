@@ -17,31 +17,29 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.block;
+package io.yruel.moonshiners.block.item;
 
+import io.yruel.moonshiners.util.interfaces.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockPlanks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 
-import javax.annotation.Nonnull;
-import java.util.List;
-
-public class CustomBlockLeaf extends BlockLeaves {
-    public CustomBlockLeaf(String name) {
-        super();
+@MethodsReturnNonnullByDefault
+public class ItemBlockLogVariants extends ItemBlock {
+    public ItemBlockLogVariants(Block block) {
+        super(block);
+        setHasSubtypes(true);
+        setMaxDamage(0);
     }
 
     @Override
-    public BlockPlanks.EnumType getWoodType(int meta) {
-        return null;
+    public int getMetadata(int damage) {
+        return damage;
     }
 
-    @Nonnull
     @Override
-    public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return null;
+    public String getUnlocalizedName(ItemStack stack) {
+        return "tile." + ((IMetaName)this.block).getSpecialName(stack) + "_" + super.getUnlocalizedName().substring(5);
     }
 }

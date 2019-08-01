@@ -22,3 +22,5 @@ tile.copper_block.name=Copper Block
 tile.copper_ore.name=Copper Ore
 tile.fermenter.name=Fermenter
 tile.juniper_planks.name=Juniper Wood Planks
+tile.juniper_log.name=Juniper Wood
+tile.juniper_leaves.name=Juniper Leaves

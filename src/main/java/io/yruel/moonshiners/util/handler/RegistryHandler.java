@@ -21,13 +21,17 @@ package io.yruel.moonshiners.util.handler;
 
 import io.yruel.moonshiners.Moonshiners;
 import io.yruel.moonshiners.block.BlockOre;
-import io.yruel.moonshiners.block.CustomBlockPlank;
+import io.yruel.moonshiners.block.CustomBlockLeaves;
+import io.yruel.moonshiners.block.CustomBlockLog;
+import io.yruel.moonshiners.block.CustomBlockPlanks;
+import io.yruel.moonshiners.block.item.ItemBlockLeavesVariants;
+import io.yruel.moonshiners.block.item.ItemBlockLogVariants;
 import io.yruel.moonshiners.block.item.ItemBlockOreVariants;
 import io.yruel.moonshiners.block.item.ItemBlockPlanksVariants;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.util.enums.OreType;
-import io.yruel.moonshiners.util.enums.PlankType;
+import io.yruel.moonshiners.util.enums.TreeType;
 import io.yruel.moonshiners.world.generator.MoonshinersGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -58,10 +62,18 @@ public class RegistryHandler {
                     Moonshiners.proxy.registerItemVariantRenderer(item, i, OreType.values()[i].getName() + "_ore", "inventory");
                 }
             } else if (item instanceof ItemBlockPlanksVariants) {
-                for (int i = 0; i < PlankType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(item, i, PlankType.values()[i].getName() + "_planks", "inventory");
+                for (int i = 0; i < TreeType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_planks", "inventory");
                 }
-            } else {
+            } else if (item instanceof ItemBlockLogVariants) {
+                for (int i = 0; i < TreeType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_log", "inventory");
+                }
+            } else if (item instanceof ItemBlockLeavesVariants) {
+                for (int i = 0; i < TreeType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_leaves", "inventory");
+                }
+            }  else {
                 Moonshiners.proxy.registerItemRenderer(item, 0, "inventory");
             }
         }
@@ -71,11 +83,19 @@ public class RegistryHandler {
                 for (int i = 0; i < OreType.values().length; i++) {
                     Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, OreType.values()[i].getName() + "_ore", "inventory");
                 }
-            } else if (block instanceof CustomBlockPlank) {
-                for (int i = 0; i < PlankType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, PlankType.values()[i].getName() + "_planks", "inventory");
+            } else if (block instanceof CustomBlockPlanks) {
+                for (int i = 0; i < TreeType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_planks", "inventory");
                 }
-            } else {
+            } else if (block instanceof CustomBlockLog) {
+                for (int i = 0; i < TreeType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_log", "inventory");
+                }
+            } else if (block instanceof CustomBlockLeaves) {
+                for (int i = 0; i < TreeType.values().length; i++) {
+                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_leaves", "inventory");
+                }
+            }  else {
                 Moonshiners.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
             }
         }

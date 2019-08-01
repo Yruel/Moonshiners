@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "axis=x,variant=juniper": {
+      "model": "moonshiners:juniper_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,variant=juniper": {
+      "model": "moonshiners:juniper_log"
+    },
+    "axis=z,variant=juniper": {
+      "model": "moonshiners:juniper_log",
+      "x": 90
+    },
+    "axis=none,variant=juniper": {
+      "model": "moonshiners:juniper_log"
+    }
+  }
+}

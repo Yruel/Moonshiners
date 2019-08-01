@@ -17,29 +17,29 @@
  * along with Moonshiners.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.yruel.moonshiners.block;
+package io.yruel.moonshiners.block.item;
 
-import io.yruel.moonshiners.init.MoonshinersBlocks;
-import io.yruel.moonshiners.init.MoonshinersItems;
-import io.yruel.moonshiners.init.MoonshinersTabs;
+import io.yruel.moonshiners.util.interfaces.IMetaName;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 
-import java.util.Objects;
+@MethodsReturnNonnullByDefault
+public class ItemBlockLeavesVariants extends ItemBlock {
+    public ItemBlockLeavesVariants(Block block) {
+        super(block);
+        setHasSubtypes(true);
+        setMaxDamage(0);
+    }
 
-public class BlockBase extends Block {
+    @Override
+    public int getMetadata(int damage) {
+        return damage;
+    }
 
-    public BlockBase(String name, Material material, float hardness, float resistance) {
-        super(material);
-        setUnlocalizedName(name);
-        setRegistryName(name);
-        setCreativeTab(MoonshinersTabs.tab);
-
-        setHardness(hardness);
-        setResistance(resistance);
-
-        MoonshinersBlocks.BLOCKS.add(this);
-        MoonshinersItems.ITEMS.add(new ItemBlock(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        return "tile." + ((IMetaName)this.block).getSpecialName(stack) + "_" + super.getUnlocalizedName().substring(5);
     }
 }

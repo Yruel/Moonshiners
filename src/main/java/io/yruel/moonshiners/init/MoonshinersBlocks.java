@@ -30,11 +30,11 @@ public class MoonshinersBlocks {
 
     public static final List<Block> BLOCKS = new ArrayList<Block>();
 
-    public static final Block BLOCK_COPPER = new BlockBase("copper_block", Material.IRON);
+    public static final Block BLOCK_COPPER = new BlockBase("copper_block", Material.IRON, 5.0F, 10.0F);
     public static final Block BLOCK_ORE = new BlockOre("ore");
 
-    public static final Block BLOCK_PLANK = new CustomBlockPlank("planks");
-/*    public static final Block BLOCK_LOG = new CustomBlockLog("log");
-    public static final Block BLOCK_LEAVES = new CustomBlockLeaf("leaf");
-    public static final Block BLOCK_SAPLING = new CustomBlockSapling("sapling");*/
+    public static final Block BLOCK_PLANKS = new CustomBlockPlanks("planks");
+    public static final Block BLOCK_LOG = new CustomBlockLog("log");
+    public static final Block BLOCK_LEAVES = new CustomBlockLeaves("leaves");
+   /* public static final Block BLOCK_SAPLING = new CustomBlockSapling("sapling");*/
 }
