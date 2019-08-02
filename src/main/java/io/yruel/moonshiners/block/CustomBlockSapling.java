@@ -25,6 +25,7 @@ import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
 import io.yruel.moonshiners.util.enums.TreeType;
 import io.yruel.moonshiners.util.interfaces.IMetaName;
+import io.yruel.moonshiners.world.generator.MoonshinersJuniperTreeGenerator;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -157,13 +158,12 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
 
     public void generateTree(World world, Random random, BlockPos pos, IBlockState state) {
         if(TerrainGen.saplingGrowTree(world, random, pos)) return;
-        WorldGenerator generator = random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
-        int i = 0, j = 0;
+        WorldGenerator generator = (random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false));
         boolean flag = false;
 
         switch (state.getValue(VARIANT)) {
             case JUNIPER:
-                // generator = new MoonshinersJuniperTreeGenerator();
+                generator = new MoonshinersJuniperTreeGenerator();
                 break;
         }
 
@@ -187,5 +187,7 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
                 world.setBlockState(pos, blockState, 4);
             }
         }
+
+        generator.generate(world, random, pos);
     }
 }
