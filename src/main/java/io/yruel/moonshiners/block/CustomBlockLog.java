@@ -19,7 +19,7 @@
 
 package io.yruel.moonshiners.block;
 
-import io.yruel.moonshiners.block.item.ItemBlockPlanksVariants;
+import io.yruel.moonshiners.block.item.ItemBlockTreeVariants;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
@@ -55,7 +55,7 @@ public class CustomBlockLog extends BlockLog implements IMetaName {
         setDefaultState(this.getBlockState().getBaseState().withProperty(VARIANT, TreeType.JUNIPER).withProperty(LOG_AXIS, EnumAxis.Y));
 
         MoonshinersBlocks.BLOCKS.add(this);
-        MoonshinersItems.ITEMS.add(new ItemBlockPlanksVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+        MoonshinersItems.ITEMS.add(new ItemBlockTreeVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Override

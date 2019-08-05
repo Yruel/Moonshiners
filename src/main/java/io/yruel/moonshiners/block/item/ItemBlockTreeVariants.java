@@ -20,14 +20,12 @@
 package io.yruel.moonshiners.block.item;
 
 import io.yruel.moonshiners.util.interfaces.IMetaName;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-@MethodsReturnNonnullByDefault
-public class ItemBlockLogVariants extends ItemBlock {
-    public ItemBlockLogVariants(Block block) {
+public class ItemBlockTreeVariants extends ItemBlock {
+    public ItemBlockTreeVariants(Block block) {
         super(block);
         setHasSubtypes(true);
         setMaxDamage(0);

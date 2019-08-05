@@ -19,7 +19,7 @@
 
 package io.yruel.moonshiners.block;
 
-import io.yruel.moonshiners.block.item.ItemBlockLeavesVariants;
+import io.yruel.moonshiners.block.item.ItemBlockTreeVariants;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
@@ -66,7 +66,7 @@ public class CustomBlockLeaves extends BlockLeaves implements IMetaName {
         setDefaultState(this.getBlockState().getBaseState().withProperty(VARIANT, TreeType.JUNIPER).withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.TRUE));
 
         MoonshinersBlocks.BLOCKS.add(this);
-        MoonshinersItems.ITEMS.add(new ItemBlockLeavesVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+        MoonshinersItems.ITEMS.add(new ItemBlockTreeVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
     }
 
     @Override

@@ -34,6 +34,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import org.lwjgl.Sys;
+import scala.collection.immutable.Stream;
 
 @EventBusSubscriber
 public class RegistryHandler {
@@ -53,23 +55,11 @@ public class RegistryHandler {
         for (Item item: MoonshinersItems.ITEMS) {
             if (item instanceof ItemBlockOreVariants) {
                 for (int i = 0; i < OreType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(item, i, OreType.values()[i].getName() + "_ore", "inventory");
+                    Moonshiners.proxy.registerItemVariantRenderer(item, i, OreType.values()[i].getName() + "_" + item.getUnlocalizedName().substring(5), "inventory");
                 }
-            } else if (item instanceof ItemBlockPlanksVariants) {
+            } else if (item instanceof ItemBlockTreeVariants) {
                 for (int i = 0; i < TreeType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_planks", "inventory");
-                }
-            } else if (item instanceof ItemBlockLogVariants) {
-                for (int i = 0; i < TreeType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_log", "inventory");
-                }
-            } else if (item instanceof ItemBlockLeavesVariants) {
-                for (int i = 0; i < TreeType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_leaves", "inventory");
-                }
-            } else if (item instanceof ItemBlockSaplingVariants) {
-                for (int i = 0; i < TreeType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_sapling", "inventory");
+                    Moonshiners.proxy.registerItemVariantRenderer(item, i, TreeType.values()[i].getName() + "_" + item.getUnlocalizedName().substring(5), "inventory");
                 }
             } else {
                 Moonshiners.proxy.registerItemRenderer(item, 0, "inventory");
@@ -79,23 +69,11 @@ public class RegistryHandler {
         for (Block block : MoonshinersBlocks.BLOCKS) {
             if (block instanceof BlockOre) {
                 for (int i = 0; i < OreType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, OreType.values()[i].getName() + "_ore", "inventory");
+                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, OreType.values()[i].getName() + "_" + block.getUnlocalizedName().substring(5), "inventory");
                 }
-            } else if (block instanceof CustomBlockPlanks) {
+            } else if (block instanceof CustomBlockPlanks || block instanceof CustomBlockLog || block instanceof CustomBlockLeaves || block instanceof CustomBlockSapling) {
                 for (int i = 0; i < TreeType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_planks", "inventory");
-                }
-            } else if (block instanceof CustomBlockLog) {
-                for (int i = 0; i < TreeType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_log", "inventory");
-                }
-            } else if (block instanceof CustomBlockLeaves) {
-                for (int i = 0; i < TreeType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_leaves", "inventory");
-                }
-            } else if (block instanceof CustomBlockSapling) {
-                for (int i = 0; i < TreeType.values().length; i++) {
-                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_sapling", "inventory");
+                    Moonshiners.proxy.registerItemVariantRenderer(Item.getItemFromBlock(block), i, TreeType.values()[i].getName() + "_" + block.getUnlocalizedName().substring(5), "inventory");
                 }
             } else {
                 Moonshiners.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");

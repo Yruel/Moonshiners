@@ -19,7 +19,7 @@
 
 package io.yruel.moonshiners.block;
 
-import io.yruel.moonshiners.block.item.ItemBlockSaplingVariants;
+import io.yruel.moonshiners.block.item.ItemBlockTreeVariants;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
@@ -46,6 +46,7 @@ import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import sun.reflect.generics.tree.Tree;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -69,7 +70,7 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
         this.setDefaultState(this.getBlockState().getBaseState().withProperty(VARIANT, TreeType.JUNIPER).withProperty(STAGE, 0));
 
         MoonshinersBlocks.BLOCKS.add(this);
-        MoonshinersItems.ITEMS.add(new ItemBlockSaplingVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
+        MoonshinersItems.ITEMS.add(new ItemBlockTreeVariants(this).setRegistryName(Objects.requireNonNull(this.getRegistryName())));
 
     }
 
@@ -157,37 +158,76 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
     }
 
     public void generateTree(World world, Random random, BlockPos pos, IBlockState state) {
+<<<<<<< HEAD
         if(TerrainGen.saplingGrowTree(world, random, pos)) return;
         WorldGenerator generator = (random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false));
+=======
+        if(!TerrainGen.saplingGrowTree(world, random, pos)) return;
+        WorldGenerator generator = random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
+        int i = 0;
+        int j = 0;
+>>>>>>> refactored variants, added tree generation with sapling
         boolean flag = false;
 
         switch (state.getValue(VARIANT)) {
             case JUNIPER:
+<<<<<<< HEAD
                 generator = new MoonshinersJuniperTreeGenerator();
+=======
+                label68:
+
+                for (i = 0; i >= -1; --i) {
+                    for (j = 0; j >= -1; --j) {
+                        if (this.isTwoByTwoOfType(world, pos, i, j, TreeType.JUNIPER)) {
+                            // generator = new MoonshinersMegaJuniperTreeGenerator();
+                            flag = true;
+                            break label68;
+                        }
+                    }
+                }
+
+                if (!flag) {
+                    i = 0;
+                    j = 0;
+                    generator = new MoonshinersJuniperTreeGenerator();
+                }
+>>>>>>> refactored variants, added tree generation with sapling
                 break;
         }
 
         IBlockState blockState = Blocks.AIR.getDefaultState();
         if (flag) {
-            world.setBlockState(pos.add(0, 0, 0), blockState, 4);
-            world.setBlockState(pos.add(1, 0, 0), blockState, 4);
-            world.setBlockState(pos.add(0, 0, 1), blockState, 4);
-            world.setBlockState(pos.add(1, 0, 1), blockState, 4);
+            world.setBlockState(pos.add(i, 0, j), blockState, 4);
+            world.setBlockState(pos.add(i + 1, 0, j), blockState, 4);
+            world.setBlockState(pos.add(i, 0, j + 1), blockState, 4);
+            world.setBlockState(pos.add(i + 1, 0, j + 1), blockState, 4);
         } else {
             world.setBlockState(pos, blockState, 4);
         }
 
-        if (!generator.generate(world, random, pos)) {
+        if (!generator.generate(world, random, pos.add(i, 0, j))) {
             if (flag) {
-                world.setBlockState(pos.add(0, 0, 0), blockState, 4);
-                world.setBlockState(pos.add(1, 0, 0), blockState, 4);
-                world.setBlockState(pos.add(0, 0, 1), blockState, 4);
-                world.setBlockState(pos.add(1, 0, 1), blockState, 4);
+                world.setBlockState(pos.add(i, 0, j), state, 4);
+                world.setBlockState(pos.add(i + 1, 0, j), state, 4);
+                world.setBlockState(pos.add(i, 0, j + 1), state, 4);
+                world.setBlockState(pos.add(i + 1, 0, j + 1), state, 4);
             } else {
                 world.setBlockState(pos, blockState, 4);
             }
         }
 
         generator.generate(world, random, pos);
+<<<<<<< HEAD
+=======
+    }
+
+    private boolean isTwoByTwoOfType(World world, BlockPos pos, int i, int j, TreeType type) {
+        return this.isTypeAt(world, pos.add(i, 0, j), type) && this.isTypeAt(world, pos.add(i + 1, 0, j), type) && this.isTypeAt(world, pos.add(i, 0, j + 1), type) && this.isTypeAt(world, pos.add(i + 1, 0, j + 1), type);
+    }
+
+    public boolean isTypeAt(World world, BlockPos pos, TreeType type) {
+        IBlockState iBlockState = world.getBlockState(pos);
+        return iBlockState.getBlock() == this && iBlockState.getValue(VARIANT) == type;
+>>>>>>> refactored variants, added tree generation with sapling
     }
 }
