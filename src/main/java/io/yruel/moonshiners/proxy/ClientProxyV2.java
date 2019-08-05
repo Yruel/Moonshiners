@@ -19,5 +19,25 @@
 
 package io.yruel.moonshiners.proxy;
 
-public class ClientProxyV2 {
+import io.yruel.moonshiners.MoonshinersV2;
+import io.yruel.moonshiners.block.item.ItemBlockMeta;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
+
+public class ClientProxyV2 extends CommonProxyV2 {
+    @Override
+    protected void registerModels() {
+        registerItemBlockMeta(MoonshinersV2.planks);
+    }
+
+    public static void registerItemBlockMeta(Block block) {
+        if (block != null) {
+            Item item = Item.getItemFromBlock(block);
+
+            if(item instanceof ItemBlockMeta) {
+                ((ItemBlockMeta) item).registerItemModels();
+            }
+        }
+    }
 }
