@@ -48,6 +48,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
 import sun.reflect.generics.tree.Tree;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
@@ -157,23 +158,26 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
         }
     }
 
+    @Override
+    public void updateTick(World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, Random rand) {
+        if (!world.isRemote) {
+            super.updateTick(world, pos, state, rand);
+
+            if (world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+                this.grow(world, rand, pos, state);
+            }
+        }
+    }
+
     public void generateTree(World world, Random random, BlockPos pos, IBlockState state) {
-<<<<<<< HEAD
-        if(TerrainGen.saplingGrowTree(world, random, pos)) return;
-        WorldGenerator generator = (random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false));
-=======
         if(!TerrainGen.saplingGrowTree(world, random, pos)) return;
         WorldGenerator generator = random.nextInt(10) == 0 ? new WorldGenBigTree(false) : new WorldGenTrees(false);
         int i = 0;
         int j = 0;
->>>>>>> refactored variants, added tree generation with sapling
         boolean flag = false;
 
         switch (state.getValue(VARIANT)) {
             case JUNIPER:
-<<<<<<< HEAD
-                generator = new MoonshinersJuniperTreeGenerator();
-=======
                 label68:
 
                 for (i = 0; i >= -1; --i) {
@@ -191,7 +195,6 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
                     j = 0;
                     generator = new MoonshinersJuniperTreeGenerator();
                 }
->>>>>>> refactored variants, added tree generation with sapling
                 break;
         }
 
@@ -217,8 +220,6 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
         }
 
         generator.generate(world, random, pos);
-<<<<<<< HEAD
-=======
     }
 
     private boolean isTwoByTwoOfType(World world, BlockPos pos, int i, int j, TreeType type) {
@@ -228,6 +229,5 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
     public boolean isTypeAt(World world, BlockPos pos, TreeType type) {
         IBlockState iBlockState = world.getBlockState(pos);
         return iBlockState.getBlock() == this && iBlockState.getValue(VARIANT) == type;
->>>>>>> refactored variants, added tree generation with sapling
     }
 }

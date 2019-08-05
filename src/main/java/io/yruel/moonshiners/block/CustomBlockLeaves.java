@@ -34,6 +34,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -49,6 +50,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 public class CustomBlockLeaves extends BlockLeaves implements IMetaName {
@@ -119,7 +121,47 @@ public class CustomBlockLeaves extends BlockLeaves implements IMetaName {
 
     @Override
     protected int getSaplingDropChance(IBlockState state) {
-        return 25;
+        return 3;
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(MoonshinersBlocks.BLOCK_SAPLING);
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        Random rand = world instanceof World ? ((World)world).rand : new Random();
+        int chance = this.getSaplingDropChance(state);
+
+        if (fortune > 0)
+        {
+            chance -= 2 << fortune;
+            if (chance < 10) chance = 10;
+        }
+
+        if (rand.nextInt(chance) == 0)
+        {
+            ItemStack drop = new ItemStack(getItemDropped(state, rand, fortune), 1, damageDropped(state));
+            if (!drop.isEmpty())
+                drops.add(drop);
+        }
+
+        if (state.getValue(VARIANT).getMeta() == TreeType.JUNIPER.getMeta()) {
+            ItemStack dropBerries = new ItemStack(Items.APPLE, rand.nextInt(3), damageDropped(state));
+            if(!dropBerries.isEmpty())
+                drops.add(dropBerries);
+        }
+
+        chance = 200;
+        if (fortune > 0)
+        {
+            chance -= 10 << fortune;
+            if (chance < 40) chance = 40;
+        }
+
+        this.captureDrops(true);
+        drops.addAll(this.captureDrops(false));
     }
 
     @Override
