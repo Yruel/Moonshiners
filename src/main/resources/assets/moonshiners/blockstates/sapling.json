@@ -5,6 +5,12 @@
     },
     "stage=1,variant=juniper": {
       "model": "moonshiners:juniper_sapling"
+    },
+    "stage=0,variant=maple": {
+      "model": "moonshiners:maple_sapling"
+    },
+    "stage=1,variant=maple": {
+      "model": "moonshiners:maple_sapling"
     }
   }
 }

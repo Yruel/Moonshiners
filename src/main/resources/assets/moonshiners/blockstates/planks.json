@@ -2,6 +2,9 @@
   "variants": {
     "variant=juniper": {
       "model": "moonshiners:juniper_planks"
+    },
+    "variant=maple": {
+      "model": "moonshiners:maple_planks"
     }
   }
 }

@@ -11,6 +11,18 @@
     },
     "check_decay=false,decayable=false,variant=juniper": {
       "model": "moonshiners:juniper_leaves"
+    },
+    "check_decay=true,decayable=true,variant=maple": {
+      "model": "moonshiners:maple_leaves"
+    },
+    "check_decay=true,decayable=false,variant=maple": {
+      "model": "moonshiners:maple_leaves"
+    },
+    "check_decay=false,decayable=true,variant=maple": {
+      "model": "moonshiners:maple_leaves"
+    },
+    "check_decay=false,decayable=false,variant=maple": {
+      "model": "moonshiners:maple_leaves"
     }
   }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/leaves",
+  "textures": {
+    "all": "moonshiners:blocks/maple_leaves"
+  }
+}

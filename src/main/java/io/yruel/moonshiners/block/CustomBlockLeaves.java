@@ -121,7 +121,7 @@ public class CustomBlockLeaves extends BlockLeaves implements IMetaName {
 
     @Override
     protected int getSaplingDropChance(IBlockState state) {
-        return 3;
+        return 20;
     }
 
     @Override
@@ -130,7 +130,7 @@ public class CustomBlockLeaves extends BlockLeaves implements IMetaName {
     }
 
     @Override
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune) {
         Random rand = world instanceof World ? ((World)world).rand : new Random();
         int chance = this.getSaplingDropChance(state);
 
@@ -147,17 +147,10 @@ public class CustomBlockLeaves extends BlockLeaves implements IMetaName {
                 drops.add(drop);
         }
 
-        if (state.getValue(VARIANT).getMeta() == TreeType.JUNIPER.getMeta()) {
+        if (this.getMetaFromState(state) == TreeType.JUNIPER.getMeta()) {
             ItemStack dropBerries = new ItemStack(Items.APPLE, rand.nextInt(3), damageDropped(state));
-            if(!dropBerries.isEmpty())
+            if (!dropBerries.isEmpty())
                 drops.add(dropBerries);
-        }
-
-        chance = 200;
-        if (fortune > 0)
-        {
-            chance -= 10 << fortune;
-            if (chance < 40) chance = 40;
         }
 
         this.captureDrops(true);

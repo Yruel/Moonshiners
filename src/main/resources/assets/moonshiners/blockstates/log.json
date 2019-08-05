@@ -14,6 +14,21 @@
     },
     "axis=none,variant=juniper": {
       "model": "moonshiners:juniper_log"
+    },
+    "axis=x,variant=maple": {
+      "model": "moonshiners:maple_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,variant=maple": {
+      "model": "moonshiners:maple_log"
+    },
+    "axis=z,variant=maple": {
+      "model": "moonshiners:maple_log",
+      "x": 90
+    },
+    "axis=none,variant=maple": {
+      "model": "moonshiners:maple"
     }
   }
 }
