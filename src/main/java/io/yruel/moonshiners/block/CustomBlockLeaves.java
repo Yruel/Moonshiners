@@ -78,12 +78,9 @@ public class CustomBlockLeaves extends BlockLeaves implements IMetaName {
         }
     }
 
-    /**
-     *  0 in byMetadata will be replaced by (meta % NUMBER_OF_VARIANTS)
-     */
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(VARIANT, TreeType.byMetadata(0));
+        return this.getDefaultState().withProperty(VARIANT, TreeType.byMetadata(meta % TreeType.values().length));
     }
 
     @Override

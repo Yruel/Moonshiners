@@ -26,8 +26,8 @@ import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.util.enums.OreType;
 import io.yruel.moonshiners.util.enums.TreeType;
-import io.yruel.moonshiners.world.generator.MoonshinersGenerator;
-import io.yruel.moonshiners.world.generator.MoonshinersJuniperTreeWorldGenerator;
+import io.yruel.moonshiners.world.generator.CopperOreGenerator;
+import io.yruel.moonshiners.world.generator.JuniperTreeWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -35,8 +35,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import org.lwjgl.Sys;
-import scala.collection.immutable.Stream;
 
 @EventBusSubscriber
 public class RegistryHandler {
@@ -83,7 +81,7 @@ public class RegistryHandler {
     }
 
     public static void otherRegistries() {
-        GameRegistry.registerWorldGenerator(new MoonshinersGenerator(), 0);
-        GameRegistry.registerWorldGenerator(new MoonshinersJuniperTreeWorldGenerator(), 0);
+        GameRegistry.registerWorldGenerator(new CopperOreGenerator(), 0);
+        GameRegistry.registerWorldGenerator(new JuniperTreeWorldGenerator(), 0);
     }
 }

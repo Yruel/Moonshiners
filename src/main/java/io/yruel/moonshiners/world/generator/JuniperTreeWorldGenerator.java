@@ -22,8 +22,6 @@ package io.yruel.moonshiners.world.generator;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeForest;
-import net.minecraft.world.biome.BiomeHills;
-import net.minecraft.world.biome.BiomePlains;
 import net.minecraft.world.biome.BiomeTaiga;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
@@ -34,9 +32,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class MoonshinersJuniperTreeWorldGenerator implements IWorldGenerator {
+public class JuniperTreeWorldGenerator implements IWorldGenerator {
 
-    private final WorldGenerator JUNIPER = new MoonshinersJuniperTreeGenerator();
+    private final WorldGenerator JUNIPER = new JuniperTreeGenerator();
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -44,7 +42,7 @@ public class MoonshinersJuniperTreeWorldGenerator implements IWorldGenerator {
             case 1:
                 break;
             case 0:
-                runGenerator(JUNIPER, null, random, chunkX, chunkZ, 3, -1, 0, BiomePlains.class, BiomeForest.class, BiomeTaiga.class, BiomeHills.class);
+                runGenerator(JUNIPER, world, random, chunkX, chunkZ, 3, -1, 0, BiomeForest.class, BiomeTaiga.class);
             case -1:
         }
     }

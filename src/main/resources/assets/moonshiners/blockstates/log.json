@@ -28,7 +28,7 @@
       "x": 90
     },
     "axis=none,variant=maple": {
-      "model": "moonshiners:maple"
+      "model": "moonshiners:maple_log"
     }
   }
 }

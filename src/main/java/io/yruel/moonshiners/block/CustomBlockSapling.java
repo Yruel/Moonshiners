@@ -25,7 +25,8 @@ import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.init.MoonshinersTabs;
 import io.yruel.moonshiners.util.enums.TreeType;
 import io.yruel.moonshiners.util.interfaces.IMetaName;
-import io.yruel.moonshiners.world.generator.MoonshinersJuniperTreeGenerator;
+import io.yruel.moonshiners.world.generator.JuniperTreeGenerator;
+import io.yruel.moonshiners.world.generator.MapleTreeGenerator;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -46,7 +47,6 @@ import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.event.terraingen.TerrainGen;
-import sun.reflect.generics.tree.Tree;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -115,7 +115,7 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(VARIANT, TreeType.byMetadata(0)).withProperty(STAGE, (meta & 8) >> 3);
+        return this.getDefaultState().withProperty(VARIANT, TreeType.byMetadata(meta % TreeType.values().length)).withProperty(STAGE, (meta & 8) >> 3);
     }
 
     @Override
@@ -193,9 +193,11 @@ public class CustomBlockSapling extends BlockBush implements IGrowable, IMetaNam
                 if (!flag) {
                     i = 0;
                     j = 0;
-                    generator = new MoonshinersJuniperTreeGenerator();
+                    generator = new JuniperTreeGenerator();
                 }
                 break;
+            case MAPLE:
+                generator = new MapleTreeGenerator();
         }
 
         IBlockState blockState = Blocks.AIR.getDefaultState();

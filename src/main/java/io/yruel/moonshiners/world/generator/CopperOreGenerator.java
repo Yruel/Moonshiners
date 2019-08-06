@@ -35,7 +35,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-public class MoonshinersGenerator implements IWorldGenerator {
+public class CopperOreGenerator implements IWorldGenerator {
 
     private final WorldGenMinable copperGeneratorOverworld = new WorldGenMinable(MoonshinersBlocks.BLOCK_ORE.getDefaultState().withProperty(BlockOre.VARIANT, OreType.COPPER), 9, BlockMatcher.forBlock(Blocks.AIR));
 

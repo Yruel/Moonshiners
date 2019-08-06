@@ -33,14 +33,14 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class MoonshinersJuniperTreeGenerator extends WorldGenAbstractTree {
+public class JuniperTreeGenerator extends WorldGenAbstractTree {
 
     public static final IBlockState LOG = MoonshinersBlocks.BLOCK_LOG.getDefaultState().withProperty(CustomBlockLog.VARIANT, TreeType.JUNIPER);
     public static final IBlockState LEAF = MoonshinersBlocks.BLOCK_LEAVES.getDefaultState().withProperty(CustomBlockLog.VARIANT, TreeType.JUNIPER);
 
     private int minHeight;
 
-    public MoonshinersJuniperTreeGenerator() {
+    public JuniperTreeGenerator() {
         super(false);
         this.minHeight = 9;
     }
