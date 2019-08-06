@@ -19,6 +19,8 @@
 
 package io.yruel.moonshiners.init;
 
+import io.yruel.moonshiners.item.ItemBarleySeed;
+import io.yruel.moonshiners.item.ItemCustomFood;
 import io.yruel.moonshiners.item.armor.ArmorBase;
 import io.yruel.moonshiners.item.base.ItemBase;
 import io.yruel.moonshiners.item.tool.*;
@@ -56,4 +58,10 @@ public class MoonshinersItems {
     public static final Item COPPER_CHESTPLATE = new ArmorBase("copper_chestplate", ARMOR_COPPER, 1, EntityEquipmentSlot.CHEST);
     public static final Item COPPER_LEGGINGS = new ArmorBase("copper_leggings", ARMOR_COPPER, 2,EntityEquipmentSlot.LEGS);
     public static final Item COPPER_BOOTS = new ArmorBase("copper_boots", ARMOR_COPPER, 2, EntityEquipmentSlot.FEET);
+
+    // Food
+    // TODO: New texture and plural for juniper berry
+    public static final Item JUNIPER_BERRY = new ItemCustomFood("juniper_berry", 1, false);
+    public static final Item BARLEY_SEED = new ItemBarleySeed();
+    // public static final Item BARLEY = new ItemBase("barley");
 }

@@ -145,7 +145,7 @@ public class CustomBlockLeaves extends BlockLeaves implements IMetaName {
         }
 
         if (this.getMetaFromState(state) == TreeType.JUNIPER.getMeta()) {
-            ItemStack dropBerries = new ItemStack(Items.APPLE, rand.nextInt(3), damageDropped(state));
+            ItemStack dropBerries = new ItemStack(MoonshinersItems.JUNIPER_BERRY, rand.nextInt(3), damageDropped(state));
             if (!dropBerries.isEmpty())
                 drops.add(dropBerries);
         }

@@ -4,6 +4,9 @@ itemGroup.moonshiners=Moonshiners
 # Items
 item.copper_ingot.name=Copper Ingot
 
+# Food
+item.juniper_berry.name=Juniper Berry
+
 # Tools
 item.copper_pickaxe.name=Copper Pickaxe
 item.copper_axe.name=Copper Axe
