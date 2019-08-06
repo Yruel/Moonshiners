@@ -25,7 +25,8 @@ import net.minecraft.util.IStringSerializable;
 @MethodsReturnNonnullByDefault
 public enum TreeType implements IStringSerializable {
 
-    JUNIPER(0, "juniper");
+    JUNIPER(0, "juniper"),
+    MAPLE(1, "maple");
 
     private static final TreeType[] META_LOOKUP = new TreeType[values().length];
     private final int meta;

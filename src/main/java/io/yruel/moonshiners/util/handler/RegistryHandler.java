@@ -27,6 +27,7 @@ import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.util.enums.OreType;
 import io.yruel.moonshiners.util.enums.TreeType;
 import io.yruel.moonshiners.world.generator.MoonshinersGenerator;
+import io.yruel.moonshiners.world.generator.MoonshinersJuniperTreeWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -83,5 +84,6 @@ public class RegistryHandler {
 
     public static void otherRegistries() {
         GameRegistry.registerWorldGenerator(new MoonshinersGenerator(), 0);
+        GameRegistry.registerWorldGenerator(new MoonshinersJuniperTreeWorldGenerator(), 0);
     }
 }
