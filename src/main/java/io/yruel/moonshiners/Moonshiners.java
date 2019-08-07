@@ -19,6 +19,7 @@
 
 package io.yruel.moonshiners;
 
+import io.yruel.moonshiners.init.MoonshinersSmelting;
 import io.yruel.moonshiners.proxy.CommonProxy;
 import io.yruel.moonshiners.util.Reference;
 import io.yruel.moonshiners.util.handler.RegistryHandler;
@@ -45,7 +46,9 @@ public class Moonshiners {
     }
 
     @EventHandler
-    public static void init(FMLInitializationEvent event) {}
+    public static void init(FMLInitializationEvent event) {
+        MoonshinersSmelting.init();
+    }
 
     @EventHandler
     public static void postInit(FMLPostInitializationEvent event) {}

@@ -19,11 +19,14 @@
 
 package io.yruel.moonshiners.init;
 
+import io.yruel.moonshiners.util.enums.OreType;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class MoonshinersSmelting {
     public static void init() {
-        /*GameRegistry.addSmelting(MoonshinersBlocks.oreCopper, new ItemStack(MoonshinersItems.ingotCopper), 0.6F);*/
+        GameRegistry.addSmelting(new ItemStack(MoonshinersBlocks.BLOCK_ORE, 1, OreType.COPPER.getMeta()), new ItemStack(MoonshinersItems.COPPER_INGOT), 0.6F);
     }
 }

@@ -60,8 +60,7 @@ public class MoonshinersItems {
     public static final Item COPPER_BOOTS = new ArmorBase("copper_boots", ARMOR_COPPER, 2, EntityEquipmentSlot.FEET);
 
     // Food
-    // TODO: New texture and plural for juniper berry
-    public static final Item JUNIPER_BERRY = new ItemCustomFood("juniper_berry", 1, false);
+    public static final Item JUNIPER_BERRIES = new ItemCustomFood("juniper_berries", 1, false);
     public static final Item BARLEY_SEED = new ItemBarleySeed("barley_seeds");
-    // public static final Item BARLEY = new ItemBase("barley");
+    public static final Item BARLEY = new ItemBase("barley");
 }

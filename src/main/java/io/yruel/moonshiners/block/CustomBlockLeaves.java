@@ -34,7 +34,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -145,7 +144,7 @@ public class CustomBlockLeaves extends BlockLeaves implements IMetaName {
         }
 
         if (this.getMetaFromState(state) == TreeType.JUNIPER.getMeta()) {
-            ItemStack dropBerries = new ItemStack(MoonshinersItems.JUNIPER_BERRY, rand.nextInt(3), damageDropped(state));
+            ItemStack dropBerries = new ItemStack(MoonshinersItems.JUNIPER_BERRIES, rand.nextInt(4), damageDropped(state));
             if (!dropBerries.isEmpty())
                 drops.add(dropBerries);
         }

@@ -3,9 +3,11 @@ itemGroup.moonshiners=Moonshiners
 
 # Items
 item.copper_ingot.name=Copper Ingot
+item.barley_seeds.name=Barley Seeds
+item.barley.name=Barley
 
 # Food
-item.juniper_berry.name=Juniper Berry
+item.juniper_berries.name=Juniper Berries
 
 # Tools
 item.copper_pickaxe.name=Copper Pickaxe

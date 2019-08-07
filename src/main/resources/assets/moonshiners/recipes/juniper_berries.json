@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "moonshiners:leaves",
+      "data": 0
+    }
+  ],
+  "result": {
+    "item": "moonshiners:juniper_berries",
+    "count": 2
+  }
+}

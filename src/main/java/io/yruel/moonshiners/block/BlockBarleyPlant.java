@@ -2,6 +2,7 @@ package io.yruel.moonshiners.block;
 
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersItems;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -16,8 +17,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.Objects;
+import java.util.Random;
 
+@MethodsReturnNonnullByDefault
 public class BlockBarleyPlant extends BlockCrops {
 
     private static final AxisAlignedBB[] barley = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
@@ -34,7 +38,9 @@ public class BlockBarleyPlant extends BlockCrops {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             if (this.isMaxAge(state)) {
-                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.BARLEY_SEED, 2)));
+                Random random = new Random();
+                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.BARLEY_SEED, random.nextInt(4))));
+                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.BARLEY, 1)));
                 worldIn.setBlockState(pos, this.withAge(0));
                 return true;
             }
@@ -50,7 +56,7 @@ public class BlockBarleyPlant extends BlockCrops {
 
     @Override
     protected Item getCrop() {
-        return MoonshinersItems.BARLEY_SEED;
+        return MoonshinersItems.BARLEY;
     }
 
     @Override
