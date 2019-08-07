@@ -20,6 +20,7 @@
 package io.yruel.moonshiners.init;
 
 import io.yruel.moonshiners.item.ItemBarleySeed;
+import io.yruel.moonshiners.item.ItemCornSeed;
 import io.yruel.moonshiners.item.ItemCustomFood;
 import io.yruel.moonshiners.item.armor.ArmorBase;
 import io.yruel.moonshiners.item.base.ItemBase;
@@ -63,4 +64,5 @@ public class MoonshinersItems {
     public static final Item JUNIPER_BERRIES = new ItemCustomFood("juniper_berries", 1, false);
     public static final Item BARLEY_SEED = new ItemBarleySeed("barley_seeds");
     public static final Item BARLEY = new ItemBase("barley");
+    public static final Item CORN_SEED = new ItemCornSeed("corn_seeds");
 }

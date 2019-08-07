@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "moonshiners:blocks/corn_stage_4"
+  }
+}
