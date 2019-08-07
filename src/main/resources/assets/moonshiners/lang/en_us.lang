@@ -4,6 +4,7 @@ itemGroup.moonshiners=Moonshiners
 # Items
 item.copper_ingot.name=Copper Ingot
 item.barley_seeds.name=Barley Seeds
+item.corn_seeds.name=Corn Seeds
 item.barley.name=Barley
 
 # Food
@@ -35,3 +36,4 @@ tile.maple_log.name=Maple Wood
 tile.maple_leaves.name=Maple Leaves
 tile.maple_sapling.name=Maple Sapling
 tile.barley_plant.name=Barley Plant
+tile.corn_plant.name=Corn Plant
