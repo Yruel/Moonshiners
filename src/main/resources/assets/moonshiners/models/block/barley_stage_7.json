@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "moonshiners:blocks/barley_stage_7"
+  }
+}

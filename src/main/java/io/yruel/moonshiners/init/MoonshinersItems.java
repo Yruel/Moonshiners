@@ -62,6 +62,6 @@ public class MoonshinersItems {
     // Food
     // TODO: New texture and plural for juniper berry
     public static final Item JUNIPER_BERRY = new ItemCustomFood("juniper_berry", 1, false);
-    public static final Item BARLEY_SEED = new ItemBarleySeed();
+    public static final Item BARLEY_SEED = new ItemBarleySeed("barley_seeds");
     // public static final Item BARLEY = new ItemBase("barley");
 }

@@ -20,6 +20,8 @@ import java.util.Objects;
 
 public class BlockBarleyPlant extends BlockCrops {
 
+    private static final AxisAlignedBB[] barley = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
+
     public BlockBarleyPlant(String name) {
         setUnlocalizedName(name);
         setRegistryName(name);
@@ -49,5 +51,10 @@ public class BlockBarleyPlant extends BlockCrops {
     @Override
     protected Item getCrop() {
         return MoonshinersItems.BARLEY_SEED;
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return barley[state.getValue(this.getAgeProperty())];
     }
 }
