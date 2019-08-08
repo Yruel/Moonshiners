@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "moonshiners:corn"
+    }
+  ],
+  "result": {
+    "item": "moonshiners:corn_seeds",
+    "count": 3
+  }
+}

@@ -46,6 +46,8 @@ public class MoonshinersItems {
 
     // Items
     public static final Item COPPER_INGOT = new ItemBase("copper_ingot");
+    public static final Item BARLEY_SEED = new ItemBarleySeed("barley_seeds");
+    public static final Item BARLEY = new ItemBase("barley");
 
     // Tools
     public static final Item COPPER_AXE = new ToolAxe("copper_axe", TOOL_COPPER, 8F, -3.15F);
@@ -62,7 +64,7 @@ public class MoonshinersItems {
 
     // Food
     public static final Item JUNIPER_BERRIES = new ItemCustomFood("juniper_berries", 1, false);
-    public static final Item BARLEY_SEED = new ItemBarleySeed("barley_seeds");
-    public static final Item BARLEY = new ItemBase("barley");
     public static final Item CORN_SEED = new ItemCornSeed("corn_seeds");
+    public static final Item CORN = new ItemCustomFood("corn", 3, false);
+    public static final Item POPCORN = new ItemCustomFood("popcorn", 2, false);
 }

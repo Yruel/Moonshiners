@@ -64,7 +64,7 @@ public class BlockCornPlantBottom extends BlockCrops {
             if (this.isMaxAge(state) && ((BlockCornPlantTop) cornTop.getBlock()).getAge(cornTop) >= ((BlockCornPlantTop) cornTop.getBlock()).getMaxAge()) {
                 Random random = new Random();
                 worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.CORN_SEED, random.nextInt(3) + 1)));
-                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.BARLEY, 1)));
+                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.CORN, 1)));
                 worldIn.setBlockState(pos.up(), Blocks.AIR.getDefaultState());
                 worldIn.setBlockState(pos, this.withAge(0));
                 return true;
@@ -213,7 +213,7 @@ public class BlockCornPlantBottom extends BlockCrops {
 
     @Override
     protected Item getCrop() {
-        return MoonshinersItems.BARLEY;
+        return MoonshinersItems.CORN;
     }
 
     @Override

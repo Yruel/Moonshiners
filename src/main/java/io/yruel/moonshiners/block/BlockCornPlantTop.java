@@ -51,7 +51,7 @@ public class BlockCornPlantTop extends BlockCornPlantBottom {
             if (this.isMaxAge(state)) {
                 Random random = new Random();
                 worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.CORN_SEED, random.nextInt(3) + 1)));
-                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.BARLEY, 1)));
+                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.CORN, 1)));
                 IBlockState cornBottom = worldIn.getBlockState(pos.down());
                 worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
                 worldIn.setBlockState(pos.down(), ((BlockCornPlantBottom) cornBottom.getBlock()).withAge(0));

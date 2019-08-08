@@ -28,5 +28,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class MoonshinersSmelting {
     public static void init() {
         GameRegistry.addSmelting(new ItemStack(MoonshinersBlocks.BLOCK_ORE, 1, OreType.COPPER.getMeta()), new ItemStack(MoonshinersItems.COPPER_INGOT), 0.6F);
+        GameRegistry.addSmelting(new ItemStack(MoonshinersItems.CORN_SEED, 1), new ItemStack(MoonshinersItems.POPCORN, 1), 0F);
+        GameRegistry.addSmelting(new ItemStack(MoonshinersItems.CORN, 1), new ItemStack(MoonshinersItems.POPCORN, 3), 0F);
     }
 }

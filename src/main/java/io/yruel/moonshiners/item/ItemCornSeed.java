@@ -15,10 +15,10 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
 @MethodsReturnNonnullByDefault
-public class ItemCornSeed extends io.yruel.moonshiners.item.base.ItemBase implements IPlantable {
+public class ItemCornSeed extends ItemCustomFood implements IPlantable {
 
     public ItemCornSeed(String name) {
-        super(name);
+        super(name, 1, false);
     }
 
     @Override
