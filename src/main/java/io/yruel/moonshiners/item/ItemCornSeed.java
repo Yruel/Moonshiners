@@ -26,7 +26,7 @@ public class ItemCornSeed extends io.yruel.moonshiners.item.base.ItemBase implem
         ItemStack stack = player.getHeldItem(hand);
         IBlockState state = worldIn.getBlockState(pos);
         if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, stack) && state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) && worldIn.isAirBlock(pos.up())) {
-            worldIn.setBlockState(pos.up(), MoonshinersBlocks.PLANT_CORN.getDefaultState());
+            worldIn.setBlockState(pos.up(), MoonshinersBlocks.PLANT_CORN_BOTTOM.getDefaultState());
             stack.shrink(1);
             return EnumActionResult.SUCCESS;
         } else {
@@ -41,6 +41,6 @@ public class ItemCornSeed extends io.yruel.moonshiners.item.base.ItemBase implem
 
     @Override
     public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
-        return MoonshinersBlocks.PLANT_CORN.getDefaultState();
+        return MoonshinersBlocks.PLANT_CORN_BOTTOM.getDefaultState();
     }
 }

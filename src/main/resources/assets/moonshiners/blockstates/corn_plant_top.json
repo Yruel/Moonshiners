@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "age=0": { "model": "moonshiners:corn_stage_4" },
+    "age=1": { "model": "moonshiners:corn_stage_5" },
+    "age=2": { "model": "moonshiners:corn_stage_6" },
+    "age=3": { "model": "moonshiners:corn_stage_7" }
+  }
+}

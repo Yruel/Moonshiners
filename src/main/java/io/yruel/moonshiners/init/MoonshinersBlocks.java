@@ -39,5 +39,6 @@ public class MoonshinersBlocks {
     public static final Block BLOCK_SAPLING = new CustomBlockSapling("sapling");
 
     public static final Block PLANT_BARLEY = new BlockBarleyPlant("barley_plant");
-    public static final Block PLANT_CORN = new BlockCornPlant("corn_plant");
+    public static final Block PLANT_CORN_BOTTOM = new BlockCornPlantBottom("corn_plant_bottom");
+    public static final Block PLANT_CORN_TOP = new BlockCornPlantTop("corn_plant_top");
 }
