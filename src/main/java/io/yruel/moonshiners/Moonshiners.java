@@ -22,6 +22,7 @@ package io.yruel.moonshiners;
 import io.yruel.moonshiners.init.MoonshinersSmelting;
 import io.yruel.moonshiners.proxy.CommonProxy;
 import io.yruel.moonshiners.util.Reference;
+import io.yruel.moonshiners.util.compat.OreDictionaryCompat;
 import io.yruel.moonshiners.util.handler.RegistryHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -48,6 +49,7 @@ public class Moonshiners {
     @EventHandler
     public static void init(FMLInitializationEvent event) {
         MoonshinersSmelting.init();
+        OreDictionaryCompat.registerOres();
     }
 
     @EventHandler
