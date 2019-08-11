@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "block/block",
 	"textures": {
 		"0": "moonshiners:blocks/barrel_side",
 		"1": "moonshiners:blocks/barrel_front",
