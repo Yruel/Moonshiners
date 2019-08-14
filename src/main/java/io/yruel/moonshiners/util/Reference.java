@@ -27,4 +27,5 @@ public class Reference {
     public static final String MINECRAFT_VERSION = "1.12.2";
     public static final String CLIENT_PROXY_CLASS = "io.yruel.moonshiners.proxy.ClientProxy";
     public static final String COMMON_PROXY_CLASS = "io.yruel.moonshiners.proxy.CommonProxy";
+    public static final int GUI_COPPER_FURNACE = 0;
 }

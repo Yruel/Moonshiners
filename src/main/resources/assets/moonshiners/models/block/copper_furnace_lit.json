@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "moonshiners:blocks/copper_furnace_top",
+    "front": "moonshiners:blocks/copper_furnace_front_on",
+    "side": "moonshiners:blocks/copper_furnace_side"
+  }
+}

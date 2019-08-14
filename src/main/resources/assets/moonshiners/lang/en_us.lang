@@ -1,6 +1,8 @@
 # Creative Tab
 itemGroup.moonshiners=Moonshiners
 
+container.copper_furnace=Copper Furnace
+
 # Items
 item.copper_ingot.name=Copper Ingot
 item.barley_seeds.name=Barley Seeds
@@ -40,3 +42,4 @@ tile.maple_sapling.name=Maple Sapling
 tile.barley_plant.name=Barley Plant
 tile.corn_plant.name=Corn Plant
 tile.barrel.name=Barrel
+tile.copper_furnace.name=Copper Furnace
