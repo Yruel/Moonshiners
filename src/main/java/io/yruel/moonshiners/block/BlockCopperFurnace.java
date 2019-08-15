@@ -34,7 +34,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -45,7 +44,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockCopperFurnace extends BlockBase implements ITileEntityProvider {
+public class BlockCopperFurnace extends BlockBase {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
     public static final PropertyBool BURNING = PropertyBool.create("burning");
@@ -95,13 +94,30 @@ public class BlockCopperFurnace extends BlockBase implements ITileEntityProvider
         IBlockState state = worldIn.getBlockState(pos);
         TileEntity tileEntity = worldIn.getTileEntity(pos);
 
-        if (active) worldIn.setBlockState(pos, MoonshinersBlocks.COPPER_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, true), 3);
-        else worldIn.setBlockState(pos, MoonshinersBlocks.COPPER_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, false), 3);
+        if (active) {
+            worldIn.setBlockState(pos, MoonshinersBlocks.COPPER_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, true), 3);
+            worldIn.setBlockState(pos, MoonshinersBlocks.COPPER_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, true), 3);
+        }
+        else {
+            worldIn.setBlockState(pos, MoonshinersBlocks.COPPER_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, false), 3);
+            worldIn.setBlockState(pos, MoonshinersBlocks.COPPER_FURNACE.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(BURNING, false), 3);
+        }
 
         if (tileEntity != null) {
             tileEntity.validate();
             worldIn.setTileEntity(pos, tileEntity);
         }
+    }
+
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileEntityCopperFurnace();
     }
 
     @Override
@@ -112,13 +128,6 @@ public class BlockCopperFurnace extends BlockBase implements ITileEntityProvider
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         worldIn.setBlockState(pos, this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
-    }
-
-    @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileEntityCopperFurnace tileEntity = (TileEntityCopperFurnace) worldIn.getTileEntity(pos);
-        InventoryHelper.dropInventoryItems(worldIn, pos, tileEntity);
-        super.breakBlock(worldIn, pos, state);
     }
 
     @Override
@@ -151,10 +160,5 @@ public class BlockCopperFurnace extends BlockBase implements ITileEntityProvider
     @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getIndex();
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityCopperFurnace();
     }
 }

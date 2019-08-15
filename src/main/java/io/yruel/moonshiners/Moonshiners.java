@@ -23,6 +23,7 @@ import io.yruel.moonshiners.init.MoonshinersSmelting;
 import io.yruel.moonshiners.proxy.CommonProxy;
 import io.yruel.moonshiners.util.Reference;
 import io.yruel.moonshiners.util.compat.OreDictionaryCompat;
+import io.yruel.moonshiners.util.handler.GuiHandler;
 import io.yruel.moonshiners.util.handler.RegistryHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -31,6 +32,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION, /*dependencies = Reference.DEPENDENCIES,*/ acceptedMinecraftVersions = Reference.MINECRAFT_VERSION)
 public class Moonshiners {
@@ -50,6 +52,7 @@ public class Moonshiners {
     public static void init(FMLInitializationEvent event) {
         MoonshinersSmelting.init();
         OreDictionaryCompat.registerOres();
+        NetworkRegistry.INSTANCE.registerGuiHandler(Moonshiners.instace, new GuiHandler());
     }
 
     @EventHandler

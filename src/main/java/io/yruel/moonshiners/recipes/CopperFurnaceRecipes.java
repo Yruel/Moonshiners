@@ -4,7 +4,6 @@ import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Table;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.Map;
@@ -21,7 +20,7 @@ public class CopperFurnaceRecipes {
     }
 
     private CopperFurnaceRecipes() {
-        addSmeltingRecipe(new ItemStack(Blocks.PUMPKIN), new ItemStack(Items.WHEAT), new ItemStack(Items.PUMPKIN_PIE), 5.0F);
+        addSmeltingRecipe(new ItemStack(Blocks.ACACIA_FENCE), new ItemStack(Blocks.ACACIA_FENCE_GATE), new ItemStack(Blocks.CHEST), 5.0F);
     }
 
     public void addSmeltingRecipe(ItemStack input1, ItemStack input2, ItemStack result, float experience) {
