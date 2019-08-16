@@ -125,15 +125,15 @@ public class BlockCopperFurnace extends BlockBase {
         return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
-    @Override
+/*    @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         worldIn.setBlockState(pos, this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
-    }
+    }*/
 
-    @Override
+/*    @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
-    }
+    }*/
 
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {

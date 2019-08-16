@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -76,9 +77,9 @@ public class TileEntityCopperFurnace extends TileEntity implements ITickable {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-        compound.setInteger("BurnTime", (short) this.burnTime);
-        compound.setInteger("CookTime", (short) this.cookTime);
-        compound.setInteger("CookTimeTotal", (short) this.totalCookTime);
+        compound.setInteger("BurnTime", this.burnTime);
+        compound.setInteger("CookTime", this.cookTime);
+        compound.setInteger("CookTimeTotal", this.totalCookTime);
         compound.setTag("Inventory", this.handler.serializeNBT());
 
         if (this.hasCustomName()) compound.setString("CustomName", this.customName);
@@ -96,58 +97,48 @@ public class TileEntityCopperFurnace extends TileEntity implements ITickable {
 
     @Override
     public void update() {
+        boolean flag = this.isBurning();
+        boolean flag1 = false;
 
-        if (this.isBurning()) {
-            --this.burnTime;
-            BlockCopperFurnace.setState(true, world, pos);
-        }
+        if (!this.world.isRemote) {
+            if (!(this.handler.getStackInSlot(0)).isEmpty() || !(this.handler.getStackInSlot(1)).isEmpty()) {
+                if (this.canSmelt()) {
+                    ++this.cookTime;
 
-        ItemStack[] inputs = new ItemStack[] {handler.getStackInSlot(0), handler.getStackInSlot(1)};
-        ItemStack fuel = this.handler.getStackInSlot(2);
-
-        if (this.isBurning() || !fuel.isEmpty() && !this.handler.getStackInSlot(0).isEmpty() || !this.handler.getStackInSlot(1).isEmpty()) {
-            if (!this.isBurning() && this.canSmelt()) {
-                this.burnTime = getItemBurnTime(fuel);
-                this.currentBurnTime = burnTime;
-
-                if (this.isBurning() && !fuel.isEmpty()) {
-                    Item item = fuel.getItem();
-                    fuel.shrink(1);
-
-                    if (fuel.isEmpty()) {
-                        ItemStack item1 = item.getContainerItem(fuel);
-                        this.handler.setStackInSlot(2, item1);
+                    if (this.cookTime == 200) {
+                        this.cookTime = 0;
+                        this.smeltItem();
+                        flag1 = true;
                     }
-                }
+                } else this.cookTime = 0;
+            } else if (this.cookTime > 0) {
+                this.cookTime = MathHelper.clamp(this.cookTime - 2, 0 , 200);
+            }
+
+            if (flag != this.isBurning()) {
+                flag1 = true;
+                BlockCopperFurnace.setState(this.isBurning(), this.world, this.pos);
             }
         }
+        if (flag1) this.markDirty();
+    }
 
-        if (this.isBurning() && this.canSmelt() && cookTime > 0) {
-            cookTime++;
-            if (cookTime == totalCookTime) {
-                if (handler.getStackInSlot(3).getCount() > 0) {
-                    handler.getStackInSlot(3).grow(1);
-                } else {
-                    handler.insertItem(3, smelting, false);
-                }
 
-                smelting = ItemStack.EMPTY;
-                cookTime = 0;
-                return;
-            }
-        } else {
-            if (this.canSmelt() && this.isBurning()) {
-                ItemStack output = CopperFurnaceRecipes.getInstance().getSmeltingResult(inputs[0], inputs[1]);
-                if (!output.isEmpty()) {
-                    smelting = output;
-                    cookTime++;
-                    inputs[0].shrink(1);
-                    inputs[1].shrink(1);
-                    handler.setStackInSlot(0, inputs[0]);
-                    handler.setStackInSlot(1, inputs[1]);
-                }
-            }
+
+
+    public void smeltItem() {
+        ItemStack[] inputs = new ItemStack[] {this.handler.getStackInSlot(0), this.handler.getStackInSlot(1)};
+        ItemStack result = CopperFurnaceRecipes.getInstance().getSmeltingResult(inputs[0], inputs[1]);
+        ItemStack output = this.handler.getStackInSlot(3);
+
+        if (output.isEmpty()) {
+            this.handler.setStackInSlot(3, result.copy());
+        } else if (output.getItem() == result.getItem()) {
+            output.grow(result.getCount());
         }
+
+        inputs[0].shrink(1);
+        inputs[1].shrink(1);
     }
 
     private boolean canSmelt() {
