@@ -25,7 +25,6 @@ import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.tileentity.TileEntityCopperFurnace;
 import io.yruel.moonshiners.util.Reference;
 import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
