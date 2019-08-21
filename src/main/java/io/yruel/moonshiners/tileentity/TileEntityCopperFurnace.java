@@ -4,6 +4,7 @@ import io.yruel.moonshiners.block.BlockCopperFurnace;
 import io.yruel.moonshiners.recipes.CopperFurnaceRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -12,10 +13,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,14 +30,24 @@ import javax.annotation.Nullable;
 
 public class TileEntityCopperFurnace extends TileEntity implements ITickable {
 
-    private ItemStackHandler handler = new ItemStackHandler(4);
-    private String customName;
-    private ItemStack smelting = ItemStack.EMPTY;
-
     private int burnTime;
     private int currentBurnTime;
     private int cookTime;
     private int totalCookTime = 200;
+
+    private String customName;
+
+    private ItemStackHandler handler = new ItemStackHandler(4) {
+        @Override
+        protected void onContentsChanged(int slot) {
+            TileEntityCopperFurnace.this.markDirty();
+        }
+    };
+
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return true;
+    }
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
@@ -44,7 +57,8 @@ public class TileEntityCopperFurnace extends TileEntity implements ITickable {
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return (T) this.handler;
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(handler);
         return super.getCapability(capability, facing);
     }
 
@@ -100,19 +114,48 @@ public class TileEntityCopperFurnace extends TileEntity implements ITickable {
         boolean flag = this.isBurning();
         boolean flag1 = false;
 
+        if (this.isBurning()) {
+            --this.burnTime;
+        }
+
         if (!this.world.isRemote) {
-            if (!(this.handler.getStackInSlot(0)).isEmpty() || !(this.handler.getStackInSlot(1)).isEmpty()) {
-                if (this.canSmelt()) {
+
+            ItemStack[] inputs = new ItemStack[] {this.handler.getStackInSlot(0), this.handler.getStackInSlot(1)};
+            ItemStack fuel = this.handler.getStackInSlot(2);
+
+            if (this.isBurning() || !(fuel).isEmpty() && (!(inputs[0]).isEmpty() || !(inputs[1]).isEmpty())) {
+
+                if (!this.isBurning() && this.canSmelt()) {
+                    this.burnTime = getItemBurnTime(fuel);
+                    this.currentBurnTime = this.burnTime;
+
+                    if (this.isBurning()) {
+                        flag1 = true;
+
+                        if (!fuel.isEmpty()) {
+                            Item item = fuel.getItem();
+                            fuel.shrink(1);
+
+                            if (fuel.isEmpty()) {
+                                ItemStack item1 = item.getContainerItem(fuel);
+                                this.handler.setStackInSlot(2, item1);
+                            }
+                        }
+                    }
+                }
+
+                if (this.isBurning() && this.canSmelt()) {
                     ++this.cookTime;
 
-                    if (this.cookTime == 200) {
+                    if (this.cookTime == this.totalCookTime) {
                         this.cookTime = 0;
+                        this.totalCookTime = 200;
                         this.smeltItem();
                         flag1 = true;
                     }
                 } else this.cookTime = 0;
-            } else if (this.cookTime > 0) {
-                this.cookTime = MathHelper.clamp(this.cookTime - 2, 0 , 200);
+            } else if (!this.isBurning() && this.cookTime > 0) {
+                this.cookTime = MathHelper.clamp(this.cookTime - 2, 0 , this.totalCookTime);
             }
 
             if (flag != this.isBurning()) {
@@ -186,8 +229,8 @@ public class TileEntityCopperFurnace extends TileEntity implements ITickable {
         return getItemBurnTime(fuel) > 0;
     }
 
-    public boolean isUsableByPlayer(EntityPlayer player) {
-        return this.world.getTileEntity(this.pos) == this && player.getDistanceSq((double) this.pos.getX() + 0.5D, (double) this.pos.getY() + 0.5D, (double) this.pos.getZ() + 0.5D) <= 64.0D;
+    public boolean isUsableByPlayer(EntityPlayer playerIn) {
+        return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64.0D;
     }
 
     public int getField(int id) {
