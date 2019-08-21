@@ -45,4 +45,6 @@ public class MoonshinersBlocks {
     public static final Block BARREL = new BlockBarrel("barrel", Material.WOOD, 3.0F, 5.0F);
 
     public static final Block COPPER_FURNACE = new BlockCopperFurnace("copper_furnace");
+
+    public static final Block BLOCK_POTATO_MASH = new BlockFluid("potato_mash", MoonshinersFluids.FLUID_POTATO_MASH, Material.WATER);
 }

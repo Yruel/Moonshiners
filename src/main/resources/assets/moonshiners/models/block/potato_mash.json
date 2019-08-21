@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "moonshiners:blocks/potato_mash_still"
+  }
+}

@@ -25,6 +25,8 @@ import io.yruel.moonshiners.util.Reference;
 import io.yruel.moonshiners.util.compat.OreDictionaryCompat;
 import io.yruel.moonshiners.util.handler.GuiHandler;
 import io.yruel.moonshiners.util.handler.RegistryHandler;
+import io.yruel.moonshiners.util.handler.RenderHandler;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -40,12 +42,18 @@ public class Moonshiners {
     @Instance
     public static Moonshiners instace;
 
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
+
     @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
     public static CommonProxy proxy;
 
     @EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        RegistryHandler.otherRegistries();
+        RegistryHandler.onFluidRegister();
+        RegistryHandler.onGeneratorRegister();
+        RenderHandler.registerCustomMeshesAndStates();
     }
 
     @EventHandler

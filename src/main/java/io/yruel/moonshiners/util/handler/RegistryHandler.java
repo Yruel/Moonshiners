@@ -23,6 +23,7 @@ import io.yruel.moonshiners.Moonshiners;
 import io.yruel.moonshiners.block.*;
 import io.yruel.moonshiners.block.item.*;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
+import io.yruel.moonshiners.init.MoonshinersFluids;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.util.enums.OreType;
 import io.yruel.moonshiners.util.enums.TreeType;
@@ -32,6 +33,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -81,8 +84,16 @@ public class RegistryHandler {
         }
     }
 
-    public static void otherRegistries() {
+    public static void onGeneratorRegister() {
         GameRegistry.registerWorldGenerator(new CopperOreGenerator(), 0);
         GameRegistry.registerWorldGenerator(new JuniperTreeWorldGenerator(), 0);
+    }
+
+    public static void onFluidRegister() {
+        for (Fluid fluid: MoonshinersFluids.FLUIDS) {
+            FluidRegistry.registerFluid(fluid);
+            FluidRegistry.addBucketForFluid(fluid);
+        }
+
     }
 }

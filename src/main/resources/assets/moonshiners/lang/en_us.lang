@@ -43,3 +43,6 @@ tile.barley_plant.name=Barley Plant
 tile.corn_plant.name=Corn Plant
 tile.barrel.name=Barrel
 tile.copper_furnace.name=Copper Furnace
+
+# Fluids
+fluid.potato_mash=Potato Mash
