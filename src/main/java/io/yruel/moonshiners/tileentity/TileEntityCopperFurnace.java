@@ -58,7 +58,7 @@ public class TileEntityCopperFurnace extends TileEntity implements ITickable {
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(handler);
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(handler);
         return super.getCapability(capability, facing);
     }
 

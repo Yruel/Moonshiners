@@ -1,7 +1,9 @@
 package io.yruel.moonshiners.block;
 
+import io.yruel.moonshiners.Moonshiners;
 import io.yruel.moonshiners.fluid.FluidTankBase;
-import io.yruel.moonshiners.tileentity.TileEntityBarrel;
+import io.yruel.moonshiners.tileentity.TileEntityBase;
+import io.yruel.moonshiners.util.Reference;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -9,7 +11,6 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -34,25 +35,16 @@ public class BlockBarrel extends BlockContainerBase {
         setDefaultState(this.getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
-    /*public Item getItemBlock() {
-        return new ItemBlockTank(this);
-    }*/
-
     @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityBarrel();
+        return new TileEntityBase();
     }
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity instanceof TileEntityBarrel) {
-                if (tileEntity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing) && FluidUtil.interactWithFluidHandler(playerIn, hand, tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing))) {
-                    return true;
-                }
-            }
+            playerIn.openGui(Moonshiners.instace, Reference.GUI_BARREL, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
