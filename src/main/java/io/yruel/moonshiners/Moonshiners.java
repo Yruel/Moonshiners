@@ -40,7 +40,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 public class Moonshiners {
 
     @Instance
-    public static Moonshiners instace;
+    public static Moonshiners instance;
 
     static {
         FluidRegistry.enableUniversalBucket();
@@ -60,7 +60,7 @@ public class Moonshiners {
     public static void init(FMLInitializationEvent event) {
         MoonshinersSmelting.init();
         OreDictionaryCompat.registerOres();
-        NetworkRegistry.INSTANCE.registerGuiHandler(Moonshiners.instace, new GuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(Moonshiners.instance, new GuiHandler());
     }
 
     @EventHandler

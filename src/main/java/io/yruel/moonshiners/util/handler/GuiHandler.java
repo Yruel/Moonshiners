@@ -1,5 +1,6 @@
 package io.yruel.moonshiners.util.handler;
 
+import io.yruel.moonshiners.container.ContainerBarrel;
 import io.yruel.moonshiners.container.ContainerCopperFurnace;
 import io.yruel.moonshiners.gui.GuiBarrel;
 import io.yruel.moonshiners.gui.GuiCopperFurnace;
@@ -10,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nullable;
 
@@ -26,7 +28,10 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == Reference.GUI_COPPER_FURNACE) return new GuiCopperFurnace(player.inventory, (TileEntityCopperFurnace) world.getTileEntity(new BlockPos(x, y, z)));
-        else if (ID == Reference.GUI_BARREL) return new GuiBarrel(player.inventory, (TileEntityBarrel) world.getTileEntity(new BlockPos(x, y, z)));
+        else if (ID == Reference.GUI_BARREL) {
+            System.out.println(((TileEntityBarrel) world.getTileEntity(new BlockPos(x, y, z))).getTank(0).getInfo().fluid);
+            return new GuiBarrel(player.inventory, (TileEntityBarrel) world.getTileEntity(new BlockPos(x, y, z)));
+        }
         return null;
     }
 }

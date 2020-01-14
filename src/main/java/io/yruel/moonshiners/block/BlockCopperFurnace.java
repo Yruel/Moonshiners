@@ -67,7 +67,7 @@ public class BlockCopperFurnace extends BlockBase {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            playerIn.openGui(Moonshiners.instace, Reference.GUI_COPPER_FURNACE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(Moonshiners.instance, Reference.GUI_COPPER_FURNACE, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
