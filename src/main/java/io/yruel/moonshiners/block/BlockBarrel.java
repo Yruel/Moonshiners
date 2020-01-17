@@ -4,8 +4,10 @@ import io.yruel.moonshiners.Moonshiners;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.tileentity.TileEntityBarrel;
 import io.yruel.moonshiners.util.Reference;
+import io.yruel.moonshiners.util.fluid.FluidUtils;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockHorizontal;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -22,12 +24,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Objects;
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
@@ -58,28 +62,20 @@ public class BlockBarrel extends BlockBase {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            TileEntity tileEntity = worldIn.getTileEntity(pos);
-            if (tileEntity.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null)) {
-                ItemStack item = playerIn.getHeldItem(hand);
-                IFluidHandler handlerInput = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.NORTH);
-                IFluidHandler handlerOutput = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.SOUTH);
+            final TileEntityBarrel tileEntity = (TileEntityBarrel) worldIn.getTileEntity(pos);
+            ItemStack item = playerIn.getHeldItem(hand);
+            // IFluidHandler handlerOutput = tileEntity.outputTank;
 
-                if (item.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)) {
-                    FluidActionResult result = FluidUtil.tryEmptyContainerAndStow(item, handlerInput, new InvWrapper(playerIn.inventory), Integer.MAX_VALUE, playerIn, true);
-                    if (result.isSuccess()) {
-                        playerIn.setHeldItem(hand, result.getResult());
-                        return true;
-                    } else {
-                        result = FluidUtil.tryFillContainerAndStow(item, handlerInput, new InvWrapper(playerIn.inventory), Integer.MAX_VALUE, playerIn, true);
-                        if (result.isSuccess()) {
-                            playerIn.setHeldItem(hand, result.getResult());
-                            return true;
-                        }
-                    }
-                    return false;
+            if (item != FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.WATER, 1000))) {
+                IFluidHandler handler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.NORTH);
+                FluidActionResult res = FluidUtils.interactWithFluidHandler(item, handler, playerIn);
+                if (res.isSuccess()) {
+                    playerIn.setHeldItem(hand, res.getResult());
+                    return true;
                 }
             }
             playerIn.openGui(Moonshiners.instance, Reference.GUI_BARREL, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            return true;
         }
         return true;
     }
