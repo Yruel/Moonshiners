@@ -26,6 +26,7 @@ import io.yruel.moonshiners.util.compat.OreDictionaryCompat;
 import io.yruel.moonshiners.util.handler.GuiHandler;
 import io.yruel.moonshiners.util.handler.RegistryHandler;
 import io.yruel.moonshiners.util.handler.RenderHandler;
+import io.yruel.moonshiners.util.network.ModPacketHandler;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -51,6 +52,7 @@ public class Moonshiners {
 
     @EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+        ModPacketHandler.registerMessage(Reference.ID);
         RegistryHandler.onFluidRegister();
         RegistryHandler.onGeneratorRegister();
         RenderHandler.registerCustomMeshesAndStates();

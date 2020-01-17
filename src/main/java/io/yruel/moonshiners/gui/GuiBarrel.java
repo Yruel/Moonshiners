@@ -44,7 +44,7 @@ public class GuiBarrel extends GuiContainer {
         if (this.isPointInRegion(fluidBar.x, fluidBar.y, fluidBar.width, fluidBar.height, mouseX, mouseY)) {
             List<String> inputFluid = new ArrayList<>();
             //inputFluid.add(Objects.requireNonNull(tileEntity.inputTank.getFluid()).amount + " / " + tileEntity.inputTank.getCapacity() + " MB");
-            inputFluid.add(tileEntity.inputTank.getFluidAmount() + " / " + tileEntity.inputTank.getCapacity() + " MB");
+            inputFluid.add(tileEntity.getClientFluidInAmount() + " / " + tileEntity.inputTank.getCapacity() + " MB");
             GuiUtils.drawHoveringText(inputFluid, mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
         }
     }
@@ -53,11 +53,11 @@ public class GuiBarrel extends GuiContainer {
         Fluid fluid = FluidRegistry.WATER;
         TextureAtlasSprite fluidTexture = mc.getTextureMapBlocks().getTextureExtry(fluid.getStill().toString());
         mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        int fluidHeight = (int) ((double) (tileEntity.inputTank.getFluidAmount()) / (double) (tileEntity.inputTank.getCapacity()) * fluidBar.height);
-        if (tileEntity.inputTank.getFluidAmount() == 0) {
+        int fluidHeight = (int) ((double) (tileEntity.getClientFluidInAmount()) / (double) (tileEntity.inputTank.getCapacity()) * fluidBar.height);
+        if (tileEntity.getClientFluidInAmount() == 0) {
             fluidHeight = 0;
         }
-        if (tileEntity.inputTank.getFluidAmount() == tileEntity.inputTank.getCapacity()) {
+        if (tileEntity.getClientFluidInAmount() == tileEntity.inputTank.getCapacity()) {
             fluidHeight = fluidBar.height;
         }
         this.drawTexturedModalRect(this.guiLeft + fluidBar.x, this.guiTop + fluidBar.y + (fluidBar.height - fluidHeight), fluidTexture, fluidBar.width, fluidHeight);

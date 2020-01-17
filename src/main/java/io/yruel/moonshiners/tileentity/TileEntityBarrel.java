@@ -1,74 +1,26 @@
 package io.yruel.moonshiners.tileentity;
 
-import net.minecraft.block.state.IBlockState;
+import io.yruel.moonshiners.util.interfaces.IRestorableTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 import javax.annotation.Nullable;
 
-public class TileEntityBarrel extends TileEntity implements ITickable {
+public class TileEntityBarrel extends TileEntity implements ITickable, IRestorableTileEntity {
 
     public FluidTank inputTank = new FluidTank(2000);
+    private int clientAmountIn = -1;
 
     public FluidTank outputTank = new FluidTank(2000);
+    private int clientAmountOut = -1;
 
-    /*private IFluidHandler fluidHandlerInput = new IFluidHandler() {
-        @Override
-        public IFluidTankProperties[] getTankProperties() {
-            return FluidTankProperties.convert(new FluidTankInfo[] {
-                    inputTank.getInfo()
-            });
-        }
 
-        @Override
-        public int fill(FluidStack resource, boolean doFill) {
-            return inputTank.fill(resource, doFill);
-        }
-
-        @Nullable
-        @Override
-        public FluidStack drain(FluidStack resource, boolean doDrain) {
-            return inputTank.drain(resource, doDrain);
-        }
-
-        @Nullable
-        @Override
-        public FluidStack drain(int maxDrain, boolean doDrain) {
-            return inputTank.drain(maxDrain, doDrain);
-        }
-    };
-
-    private IFluidHandler fluidHandlerOutput = new IFluidHandler() {
-        @Override
-        public IFluidTankProperties[] getTankProperties() {
-            return FluidTankProperties.convert(new FluidTankInfo[] {outputTank.getInfo()});
-        }
-
-        @Override
-        public int fill(FluidStack resource, boolean doFill) {
-            return outputTank.fill(resource, doFill);
-        }
-
-        @Nullable
-        @Override
-        public FluidStack drain(FluidStack resource, boolean doDrain) {
-            return outputTank.drain(resource, doDrain);
-        }
-
-        @Nullable
-        @Override
-        public FluidStack drain(int maxDrain, boolean doDrain) {
-            return outputTank.drain(maxDrain, doDrain);
-        }
-    };*/
 
     @Override
     public void update() {
@@ -76,14 +28,6 @@ public class TileEntityBarrel extends TileEntity implements ITickable {
             this.getTank(0).drain(1, true);
         }*/
     }
-
-/*    public FluidTank getTank(int index) {
-        if (index == 0) {
-            return inputTank;
-        } else {
-            return outputTank;
-        }
-    }*/
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
@@ -111,6 +55,18 @@ public class TileEntityBarrel extends TileEntity implements ITickable {
     }
 
     @Override
+    public void readRestorableFromNBT(NBTTagCompound compound) {
+        this.inputTank.readFromNBT(compound.getCompoundTag("inputTank"));
+        this.outputTank.readFromNBT(compound.getCompoundTag("outputTank"));
+    }
+
+    @Override
+    public void writeRestorableFromNBT(NBTTagCompound compound) {
+        compound.setTag("inputTank", inputTank.writeToNBT(new NBTTagCompound()));
+        compound.setTag("outputTank", outputTank.writeToNBT(new NBTTagCompound()));
+    }
+
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         if (this.inputTank != null && this.inputTank.getFluid() != null) {
             compound.setTag("fluidDataInput", inputTank.getFluid().writeToNBT(new NBTTagCompound()));
@@ -132,11 +88,41 @@ public class TileEntityBarrel extends TileEntity implements ITickable {
         if (compound.hasKey("fluidDataOutput")) {
             this.outputTank.setFluid(FluidStack.loadFluidStackFromNBT(compound.getCompoundTag("fluidDataOutput")));
         }
-        if (this.inputTank != null && inputTank.getFluid() != null && compound.hasKey("inputTank")) {
+        if (inputTank != null && inputTank.getFluid() != null && compound.hasKey("inputTank")) {
             inputTank.readFromNBT(compound.getCompoundTag("inputTank"));
         }
-        if (this.outputTank != null && outputTank.getFluid() != null && compound.hasKey("outputTank")) {
+        if (this.inputTank != null) {
+            this.inputTank.setTileEntity(this);
+        }
+        if (outputTank != null && outputTank.getFluid() != null && compound.hasKey("outputTank")) {
             inputTank.readFromNBT(compound.getCompoundTag("outputTank"));
         }
+        if (this.outputTank != null) {
+            this.outputTank.setTileEntity(this);
+        }
+    }
+
+    public int getClientFluidInAmount() {
+        return clientAmountIn;
+    }
+
+    public void setClientFluidInAmount(int clientAmountFluid) {
+        this.clientAmountIn = clientAmountFluid;
+    }
+
+    public int getFluidInAmount() {
+        return inputTank.getFluidAmount();
+    }
+
+    public int getClientFluidOutAmount() {
+        return clientAmountOut;
+    }
+
+    public void setClientFluidOutAmount(int clientAmountFluid) {
+        this.clientAmountOut = clientAmountFluid;
+    }
+
+    public int getFluidOutAmount() {
+        return outputTank.getFluidAmount();
     }
 }

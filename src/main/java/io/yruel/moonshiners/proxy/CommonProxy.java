@@ -19,7 +19,9 @@
 
 package io.yruel.moonshiners.proxy;
 
+import com.google.common.util.concurrent.ListenableFuture;
 import io.yruel.moonshiners.init.MoonshinersSmelting;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -29,4 +31,10 @@ public class CommonProxy {
 
     public void registerItemRenderer(Item item, int meta, String id) {}
     public void registerItemVariantRenderer(Item item, int meta, String filename, String id) {}
+    public ListenableFuture<Object> addScheduledTaskClient(Runnable runnableToSchedule) {
+        throw new IllegalStateException("This should only be called from client side");
+    }
+    public EntityPlayer getClientPlayer() {
+        throw new IllegalStateException("This should only be called from client side");
+    }
 }

@@ -5,9 +5,9 @@ import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.tileentity.TileEntityBarrel;
 import io.yruel.moonshiners.util.Reference;
 import io.yruel.moonshiners.util.fluid.FluidUtils;
+import io.yruel.moonshiners.util.interfaces.IRestorableTileEntity;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -17,46 +17,71 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandlerItem;
-import net.minecraftforge.items.wrapper.InvWrapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Objects;
 import java.util.Random;
 
 @MethodsReturnNonnullByDefault
 public class BlockBarrel extends BlockBase {
 
-    public static final Logger LOGGER = LogManager.getLogger(Reference.ID);
-
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-    public BlockBarrel(String name, Material material, float hardness, float resistance) {
+    public BlockBarrel(String name) {
         super(name, Material.WOOD, 3.0F, 5.0F);
         setSoundType(SoundType.WOOD);
         setDefaultState(this.getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 
     @Override
+    @ParametersAreNonnullByDefault
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        TileEntity tileEntity = world.getTileEntity(pos);
+
+        if (tileEntity instanceof IRestorableTileEntity) {
+            ItemStack stack = new ItemStack(Item.getItemFromBlock(this));
+            NBTTagCompound tagCompound = new NBTTagCompound();
+            ((IRestorableTileEntity) tileEntity).writeRestorableFromNBT(tagCompound);
+            stack.setTagCompound(tagCompound);
+            drops.add(stack);
+        } else {
+            super.getDrops(drops, world, pos, state, fortune);
+        }
+    }
+
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+        if (willHarvest) return true;
+        return super.removedByPlayer(state, world, pos, player, willHarvest);
+    }
+
+    @Override
+    @ParametersAreNonnullByDefault
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        super.harvestBlock(worldIn, player, pos, state, te, stack);
+        worldIn.setBlockToAir(pos);
+    }
+
+    @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(MoonshinersBlocks.BARREL);
+        return Item.getItemFromBlock(this);
     }
 
     @Override
     @ParametersAreNonnullByDefault
     @SuppressWarnings("deprecation")
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(MoonshinersBlocks.BARREL);
+        return new ItemStack(this.getItemDropped(state, RANDOM, 0));
     }
 
     @Override
@@ -66,7 +91,7 @@ public class BlockBarrel extends BlockBase {
             ItemStack item = playerIn.getHeldItem(hand);
             // IFluidHandler handlerOutput = tileEntity.outputTank;
 
-            if (item != FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.WATER, 1000))) {
+            if (item != FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.WATER, 1000)) && tileEntity != null) {
                 IFluidHandler handler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.NORTH);
                 FluidActionResult res = FluidUtils.interactWithFluidHandler(item, handler, playerIn);
                 if (res.isSuccess()) {
@@ -78,6 +103,20 @@ public class BlockBarrel extends BlockBase {
             return true;
         }
         return true;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+
+        TileEntity tileEntity = worldIn.getTileEntity(pos);
+
+        if (tileEntity instanceof IRestorableTileEntity) {
+            NBTTagCompound compound = stack.getTagCompound();
+            if (compound != null) {
+                ((IRestorableTileEntity) tileEntity).readRestorableFromNBT(compound);
+            }
+        }
     }
 
     @Override

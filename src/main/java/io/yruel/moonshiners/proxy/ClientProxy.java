@@ -19,8 +19,11 @@
 
 package io.yruel.moonshiners.proxy;
 
+import com.google.common.util.concurrent.ListenableFuture;
 import io.yruel.moonshiners.util.Reference;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
@@ -37,5 +40,15 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerItemVariantRenderer(Item item, int meta, String filename, String id) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.ID, filename), id));
+    }
+
+    @Override
+    public ListenableFuture<Object> addScheduledTaskClient(Runnable runnableToSchedule) {
+        return Minecraft.getMinecraft().addScheduledTask(runnableToSchedule);
+    }
+
+    @Override
+    public EntityPlayer getClientPlayer() {
+        return Minecraft.getMinecraft().player;
     }
 }

@@ -44,13 +44,15 @@ public class ContainerCopperFurnace extends Container {
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < this.listeners.size(); ++i) {
-            IContainerListener listener = this.listeners.get(i);
-
-            if (this.cookTime != this.tileEntity.getField(2)) listener.sendWindowProperty(this, 2, this.tileEntity.getField(2));
-            if (this.burnTime != this.tileEntity.getField(0)) listener.sendWindowProperty(this, 0, this.tileEntity.getField(0));
-            if (this.currentBurnTime != this.tileEntity.getField(1)) listener.sendWindowProperty(this, 1, this.tileEntity.getField(1));
-            if (this.totalCookTime != this.tileEntity.getField(3)) listener.sendWindowProperty(this, 3, this.tileEntity.getField(3));
+        for (IContainerListener listener : this.listeners) {
+            if (this.cookTime != this.tileEntity.getField(2))
+                listener.sendWindowProperty(this, 2, this.tileEntity.getField(2));
+            if (this.burnTime != this.tileEntity.getField(0))
+                listener.sendWindowProperty(this, 0, this.tileEntity.getField(0));
+            if (this.currentBurnTime != this.tileEntity.getField(1))
+                listener.sendWindowProperty(this, 1, this.tileEntity.getField(1));
+            if (this.totalCookTime != this.tileEntity.getField(3))
+                listener.sendWindowProperty(this, 3, this.tileEntity.getField(3));
         }
 
         this.cookTime = this.tileEntity.getField(2);
