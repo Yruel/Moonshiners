@@ -15,6 +15,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -92,11 +93,20 @@ public class BlockBarrel extends BlockBase {
             // IFluidHandler handlerOutput = tileEntity.outputTank;
 
             if (item != FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.WATER, 1000)) && tileEntity != null) {
-                IFluidHandler handler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.NORTH);
-                FluidActionResult res = FluidUtils.interactWithFluidHandler(item, handler, playerIn);
-                if (res.isSuccess()) {
-                    playerIn.setHeldItem(hand, res.getResult());
-                    return true;
+                if (item.getItem() == Items.BUCKET) {
+                    IFluidHandler handler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.SOUTH);
+                    FluidActionResult res = FluidUtils.interactWithFluidHandler(item, handler, playerIn);
+                    if (res.isSuccess()) {
+                        playerIn.setHeldItem(hand, res.getResult());
+                        return true;
+                    }
+                } else {
+                    IFluidHandler handler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.NORTH);
+                    FluidActionResult res = FluidUtils.interactWithFluidHandler(item, handler, playerIn);
+                    if (res.isSuccess()) {
+                        playerIn.setHeldItem(hand, res.getResult());
+                        return true;
+                    }
                 }
             }
             playerIn.openGui(Moonshiners.instance, Reference.GUI_BARREL, worldIn, pos.getX(), pos.getY(), pos.getZ());

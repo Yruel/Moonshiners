@@ -7,29 +7,24 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class GuiBarrel extends GuiContainer {
     private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.ID + ":textures/gui/barrel.png");
-    private final InventoryPlayer player;
     private final TileEntityBarrel tileEntity;
 
     protected Rectangle fluidBar = new Rectangle(36, 12, 16, 60);
 
     public GuiBarrel(InventoryPlayer player, TileEntityBarrel tileEntity) {
         super(new ContainerBarrel(player, tileEntity));
-        this.player = player;
         this.tileEntity = tileEntity;
     }
 
@@ -43,9 +38,14 @@ public class GuiBarrel extends GuiContainer {
 
         if (this.isPointInRegion(fluidBar.x, fluidBar.y, fluidBar.width, fluidBar.height, mouseX, mouseY)) {
             List<String> inputFluid = new ArrayList<>();
-            //inputFluid.add(Objects.requireNonNull(tileEntity.inputTank.getFluid()).amount + " / " + tileEntity.inputTank.getCapacity() + " MB");
             inputFluid.add(tileEntity.getClientFluidInAmount() + " / " + tileEntity.inputTank.getCapacity() + " MB");
             GuiUtils.drawHoveringText(inputFluid, mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
+        }
+
+        if (this.isPointInRegion(fluidBar.x + 32, fluidBar.y, fluidBar.width, fluidBar.height, mouseX, mouseY)) {
+            List<String> outputFluid = new ArrayList<>();
+            outputFluid.add(tileEntity.getClientFluidOutAmount() + " / " + tileEntity.outputTank.getCapacity() + " MB");
+            GuiUtils.drawHoveringText(outputFluid, mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
         }
     }
 
@@ -53,13 +53,22 @@ public class GuiBarrel extends GuiContainer {
         Fluid fluid = FluidRegistry.WATER;
         TextureAtlasSprite fluidTexture = mc.getTextureMapBlocks().getTextureExtry(fluid.getStill().toString());
         mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-        int fluidHeight = (int) ((double) (tileEntity.getClientFluidInAmount()) / (double) (tileEntity.inputTank.getCapacity()) * fluidBar.height);
+        int fluidHeightIn = (int) ((double) (tileEntity.getClientFluidInAmount()) / (double) (tileEntity.inputTank.getCapacity()) * fluidBar.height);
+        int fluidHeightOut = (int) ((double) (tileEntity.getClientFluidOutAmount()) / (double) (tileEntity.outputTank.getCapacity()) * fluidBar.height);
         if (tileEntity.getClientFluidInAmount() == 0) {
-            fluidHeight = 0;
+            fluidHeightIn = 0;
         }
         if (tileEntity.getClientFluidInAmount() == tileEntity.inputTank.getCapacity()) {
-            fluidHeight = fluidBar.height;
+            fluidHeightIn = fluidBar.height;
         }
-        this.drawTexturedModalRect(this.guiLeft + fluidBar.x, this.guiTop + fluidBar.y + (fluidBar.height - fluidHeight), fluidTexture, fluidBar.width, fluidHeight);
+        this.drawTexturedModalRect(this.guiLeft + fluidBar.x, this.guiTop + fluidBar.y + (fluidBar.height - fluidHeightIn), fluidTexture, fluidBar.width, fluidHeightIn);
+
+        if (tileEntity.getClientFluidOutAmount() == 0) {
+            fluidHeightOut = 0;
+        }
+        if (tileEntity.getClientFluidOutAmount() == tileEntity.outputTank.getCapacity()) {
+            fluidHeightOut = fluidBar.height;
+        }
+        this.drawTexturedModalRect(this.guiLeft + fluidBar.x + 32, this.guiTop + fluidBar.y + (fluidBar.height - fluidHeightOut), fluidTexture, fluidBar.width, fluidHeightOut);
     }
 }

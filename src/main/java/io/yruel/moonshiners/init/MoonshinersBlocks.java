@@ -42,7 +42,7 @@ public class MoonshinersBlocks {
     public static final Block PLANT_CORN_BOTTOM = new BlockCornPlantBottom("corn_plant_bottom");
     public static final Block PLANT_CORN_TOP = new BlockCornPlantTop("corn_plant_top");
 
-    public static final Block BARREL = new BlockBarrel("barrel", Material.WOOD, 3.0F, 5.0F);
+    public static final Block BARREL = new BlockBarrel("barrel");
 
     public static final Block COPPER_FURNACE = new BlockCopperFurnace("copper_furnace");
 

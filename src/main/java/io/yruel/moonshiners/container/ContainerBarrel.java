@@ -54,5 +54,6 @@ public class ContainerBarrel extends Container implements IMachineStateContainer
     @Override
     public void sync(int... fluids) {
         this.tileEntity.setClientFluidInAmount(fluids[0]);
+        this.tileEntity.setClientFluidOutAmount(fluids[1]);
     }
 }

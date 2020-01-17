@@ -14,19 +14,20 @@ import javax.annotation.Nullable;
 
 public class TileEntityBarrel extends TileEntity implements ITickable, IRestorableTileEntity {
 
-    public FluidTank inputTank = new FluidTank(2000);
+    public FluidTank inputTank = new FluidTank(4000);
     private int clientAmountIn = -1;
 
-    public FluidTank outputTank = new FluidTank(2000);
+    public FluidTank outputTank = new FluidTank(4000);
     private int clientAmountOut = -1;
 
 
 
     @Override
     public void update() {
-     /*   if (this.inputTank.getFluidAmount() > 0) {
-            this.getTank(0).drain(1, true);
-        }*/
+        if (this.inputTank.getFluidAmount() > 0 && this.inputTank.getFluid() != null) {
+            this.outputTank.fill(new FluidStack(this.inputTank.getFluid().getFluid(), 1), true);
+            this.inputTank.drain(1, true);
+        }
     }
 
     @Override
