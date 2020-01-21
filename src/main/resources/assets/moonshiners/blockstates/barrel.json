@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=north": {
-      "model": "moonshiners:barrel"
+    "facing=north,open=true": {
+      "model": "moonshiners:barrel_open"
     },
-    "facing=east": {
-      "model": "moonshiners:barrel",
+    "facing=east,open=true": {
+      "model": "moonshiners:barrel_open",
       "y": 90
     },
-    "facing=south": {
-      "model": "moonshiners:barrel",
+    "facing=south,open=true": {
+      "model": "moonshiners:barrel_open",
       "y": 180
     },
-    "facing=west": {
-      "model": "moonshiners:barrel",
+    "facing=west,open=true": {
+      "model": "moonshiners:barrel_open",
+      "y": 270
+    },
+    "facing=north,open=false": {
+      "model": "moonshiners:barrel_closed"
+    },
+    "facing=east,open=false": {
+      "model": "moonshiners:barrel_closed",
+      "y": 90
+    },
+    "facing=south,open=false": {
+      "model": "moonshiners:barrel_closed",
+      "y": 180
+    },
+    "facing=west,open=false": {
+      "model": "moonshiners:barrel_closed",
       "y": 270
     }
   }

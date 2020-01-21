@@ -2,6 +2,8 @@ package io.yruel.moonshiners.block;
 
 import io.yruel.moonshiners.Moonshiners;
 import io.yruel.moonshiners.init.MoonshinersBlocks;
+import io.yruel.moonshiners.init.MoonshinersFluids;
+import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.tileentity.TileEntityBarrel;
 import io.yruel.moonshiners.util.Reference;
 import io.yruel.moonshiners.util.fluid.FluidUtils;
@@ -10,10 +12,12 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -36,11 +40,12 @@ import java.util.Random;
 public class BlockBarrel extends BlockBase {
 
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final PropertyBool OPEN = PropertyBool.create("open");
 
     public BlockBarrel(String name) {
         super(name, Material.WOOD, 3.0F, 5.0F);
         setSoundType(SoundType.WOOD);
-        setDefaultState(this.getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(this.getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(OPEN, true));
     }
 
     @Override
@@ -90,17 +95,9 @@ public class BlockBarrel extends BlockBase {
         if (!worldIn.isRemote) {
             final TileEntityBarrel tileEntity = (TileEntityBarrel) worldIn.getTileEntity(pos);
             ItemStack item = playerIn.getHeldItem(hand);
-            // IFluidHandler handlerOutput = tileEntity.outputTank;
 
-            if (item != FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.WATER, 1000)) && tileEntity != null) {
-                if (item.getItem() == Items.BUCKET) {
-                    IFluidHandler handler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.SOUTH);
-                    FluidActionResult res = FluidUtils.interactWithFluidHandler(item, handler, playerIn);
-                    if (res.isSuccess()) {
-                        playerIn.setHeldItem(hand, res.getResult());
-                        return true;
-                    }
-                } else {
+            if (tileEntity != null && state.getValue(OPEN)) {
+                if ((item.getItem() instanceof UniversalBucket && ((UniversalBucket) item.getItem()).getFluid(item).getFluid() == MoonshinersFluids.FLUID_POTATO_MASH) || item.getItem() == Items.BUCKET) {
                     IFluidHandler handler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, EnumFacing.NORTH);
                     FluidActionResult res = FluidUtils.interactWithFluidHandler(item, handler, playerIn);
                     if (res.isSuccess()) {
@@ -108,6 +105,17 @@ public class BlockBarrel extends BlockBase {
                         return true;
                     }
                 }
+            }
+
+            if(item.getItem() == MoonshinersItems.COVER && tileEntity != null && state.getValue(OPEN) && playerIn.isSneaking()) {
+                item.shrink(1);
+                System.out.println("I am working");
+                worldIn.setBlockState(pos, this.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(OPEN, false), 3);
+            }
+
+            if (tileEntity != null && playerIn.isSneaking() && !state.getValue(OPEN)) {
+                worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.COVER, 1)));
+                worldIn.setBlockState(pos, state.withProperty(OPEN, true), 2);
             }
             playerIn.openGui(Moonshiners.instance, Reference.GUI_BARREL, worldIn, pos.getX(), pos.getY(), pos.getZ());
             return true;
@@ -197,7 +205,7 @@ public class BlockBarrel extends BlockBase {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
+        return new BlockStateContainer(this, FACING, OPEN);
     }
 
     @Override

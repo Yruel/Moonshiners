@@ -32,14 +32,13 @@ public class ContainerBarrel extends Container implements IMachineStateContainer
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
         if (!this.tileEntity.getWorld().isRemote) {
-            if (tileEntity.getFluidInAmount() != tileEntity.getClientFluidInAmount() || tileEntity.getFluidOutAmount() != tileEntity.getClientFluidOutAmount()) {
-                tileEntity.setClientFluidInAmount(tileEntity.getFluidInAmount());
-                tileEntity.setClientFluidOutAmount(tileEntity.getFluidOutAmount());
+            if (tileEntity.getFluidAmount() != tileEntity.getClientFluidAmount()) {
+                tileEntity.setClientFluidAmount(tileEntity.getFluidAmount());
 
                 for (IContainerListener listener : listeners) {
                     if (listener instanceof EntityPlayerMP) {
                         EntityPlayerMP player = (EntityPlayerMP) listener;
-                        ModPacketHandler.INSTANCE.sendTo(new PacketSyncMachineState(tileEntity.getFluidInAmount(), tileEntity.getFluidOutAmount()), player);
+                        ModPacketHandler.INSTANCE.sendTo(new PacketSyncMachineState(tileEntity.getFluidAmount()), player);
                     }
                 }
             }
@@ -53,7 +52,6 @@ public class ContainerBarrel extends Container implements IMachineStateContainer
 
     @Override
     public void sync(int... fluids) {
-        this.tileEntity.setClientFluidInAmount(fluids[0]);
-        this.tileEntity.setClientFluidOutAmount(fluids[1]);
+        this.tileEntity.setClientFluidAmount(fluids[0]);
     }
 }

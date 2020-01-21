@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top": "moonshiners:blocks/barrel_top_open",
+    "bottom": "moonshiners:blocks/barrel_bottom",
+    "side": "moonshiners:blocks/barrel_side"
+  }
+}

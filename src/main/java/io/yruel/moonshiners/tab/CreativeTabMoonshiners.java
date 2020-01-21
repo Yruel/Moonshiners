@@ -19,9 +19,15 @@
 
 package io.yruel.moonshiners.tab;
 
+import io.yruel.moonshiners.init.MoonshinersFluids;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 public class CreativeTabMoonshiners extends CreativeTabs {
     public CreativeTabMoonshiners() {
@@ -31,5 +37,13 @@ public class CreativeTabMoonshiners extends CreativeTabs {
     @Override
     public ItemStack getTabIconItem() {
         return new ItemStack(Items.BAKED_POTATO);
+    }
+
+    @Override
+    @ParametersAreNonnullByDefault
+    public void displayAllRelevantItems(NonNullList<ItemStack> items) {
+        super.displayAllRelevantItems(items);
+        items.add(FluidUtil.getFilledBucket(new FluidStack(MoonshinersFluids.FLUID_POTATO_MASH, 1000)));
+        items.add(FluidUtil.getFilledBucket(new FluidStack(MoonshinersFluids.FLUID_FERMENTED_POTATO_MASH, 1000)));
     }
 }

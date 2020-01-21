@@ -7,6 +7,7 @@ container.copper_furnace=Copper Furnace
 item.copper_ingot.name=Copper Ingot
 item.barley_seeds.name=Barley Seeds
 item.barley.name=Barley
+item.cover.name=Barrel Cover
 
 # Food
 item.juniper_berries.name=Juniper Berries

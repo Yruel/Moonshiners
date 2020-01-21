@@ -31,6 +31,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemBucket;
 import net.minecraftforge.common.util.EnumHelper;
 
 import java.util.ArrayList;
@@ -46,8 +47,8 @@ public class MoonshinersItems {
 
     // Items
     public static final Item COPPER_INGOT = new ItemBase("copper_ingot");
-    public static final Item BARLEY_SEED = new ItemBarleySeed("barley_seeds");
     public static final Item BARLEY = new ItemBase("barley");
+    public static final Item COVER = new ItemBase("cover");
 
     // Tools
     public static final Item COPPER_AXE = new ToolAxe("copper_axe", TOOL_COPPER, 8F, -3.15F);
@@ -67,4 +68,5 @@ public class MoonshinersItems {
     public static final Item CORN_SEED = new ItemCornSeed("corn_seeds");
     public static final Item CORN = new ItemCustomFood("corn", 3, false);
     public static final Item POPCORN = new ItemCustomFood("popcorn", 2, false);
+    public static final Item BARLEY_SEED = new ItemBarleySeed("barley_seeds");
 }
