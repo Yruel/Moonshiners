@@ -17,5 +17,6 @@ public class ModPacketHandler {
     public static void registerMessage(String channelName) {
         INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel(channelName);
         INSTANCE.registerMessage(PacketSyncMachineState.Handler.class, PacketSyncMachineState.class, nextID(), Side.CLIENT);
+        INSTANCE.registerMessage(PacketSyncMachineFluid.Handler.class, PacketSyncMachineFluid.class, nextID(), Side.CLIENT);
     }
 }

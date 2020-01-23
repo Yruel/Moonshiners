@@ -1,21 +1,27 @@
 package io.yruel.moonshiners.tileentity;
 
 import io.yruel.moonshiners.util.interfaces.IRestorableTileEntity;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.awt.*;
 
 public class TileEntityBarrel extends TileEntity implements ITickable, IRestorableTileEntity {
 
     public FluidTank tank = new FluidTank(4000);
     private int clientAmountIn = -1;
+    private FluidStack clientFluid;
 
     @Override
     public void update() {
@@ -81,6 +87,12 @@ public class TileEntityBarrel extends TileEntity implements ITickable, IRestorab
         }
     }
 
+    @Override
+    @ParametersAreNonnullByDefault
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return oldState == newSate;
+    }
+
     public int getClientFluidAmount() {
         return clientAmountIn;
     }
@@ -91,6 +103,14 @@ public class TileEntityBarrel extends TileEntity implements ITickable, IRestorab
 
     public int getFluidAmount() {
         return tank.getFluidAmount();
+    }
+
+    public FluidStack getClientFluid() {
+        return clientFluid;
+    }
+
+    public void setClientFluid(FluidStack clientFluid) {
+        this.clientFluid = clientFluid;
     }
 
     public FluidStack getFluid() {

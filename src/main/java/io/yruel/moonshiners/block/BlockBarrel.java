@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.lwjgl.Sys;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -107,15 +108,14 @@ public class BlockBarrel extends BlockBase {
                 }
             }
 
-            if(item.getItem() == MoonshinersItems.COVER && tileEntity != null && state.getValue(OPEN) && playerIn.isSneaking()) {
+            if(item.getItem() == MoonshinersItems.COVER && tileEntity != null && state.getValue(OPEN)) {
                 item.shrink(1);
-                System.out.println("I am working");
-                worldIn.setBlockState(pos, this.getDefaultState().withProperty(FACING, state.getValue(FACING)).withProperty(OPEN, false), 3);
-            }
-
-            if (tileEntity != null && playerIn.isSneaking() && !state.getValue(OPEN)) {
+                worldIn.setBlockState(pos, state.withProperty(OPEN, false), 2);
+                return true;
+            } else if (tileEntity != null && !state.getValue(OPEN) && playerIn.isSneaking()) {
                 worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.COVER, 1)));
                 worldIn.setBlockState(pos, state.withProperty(OPEN, true), 2);
+                return true;
             }
             playerIn.openGui(Moonshiners.instance, Reference.GUI_BARREL, worldIn, pos.getX(), pos.getY(), pos.getZ());
             return true;

@@ -2,21 +2,12 @@ package io.yruel.moonshiners.util.network;
 
 import io.netty.buffer.ByteBuf;
 import io.yruel.moonshiners.Moonshiners;
-import io.yruel.moonshiners.tileentity.TileEntityBarrel;
 import io.yruel.moonshiners.util.interfaces.IMachineStateContainer;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-import javax.annotation.Nullable;
 
 public class PacketSyncMachineState implements IMessage {
 

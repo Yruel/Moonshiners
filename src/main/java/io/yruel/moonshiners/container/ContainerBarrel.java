@@ -2,6 +2,7 @@ package io.yruel.moonshiners.container;
 
 import io.yruel.moonshiners.tileentity.TileEntityBarrel;
 import io.yruel.moonshiners.util.interfaces.IMachineStateContainer;
+import io.yruel.moonshiners.util.network.PacketSyncMachineFluid;
 import io.yruel.moonshiners.util.network.PacketSyncMachineState;
 import io.yruel.moonshiners.util.network.ModPacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,6 +11,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraftforge.fluids.FluidStack;
 
 public class ContainerBarrel extends Container implements IMachineStateContainer {
     private final TileEntityBarrel tileEntity;
@@ -42,6 +44,18 @@ public class ContainerBarrel extends Container implements IMachineStateContainer
                     }
                 }
             }
+
+            if (tileEntity.getFluid() != tileEntity.getClientFluid() && tileEntity.getFluid() != null) {
+                tileEntity.setClientFluid(tileEntity.getFluid());
+
+
+                for (IContainerListener listener : listeners) {
+                    if (listener instanceof EntityPlayerMP) {
+                        EntityPlayerMP player =  (EntityPlayerMP) listener;
+                        ModPacketHandler.INSTANCE.sendTo(new PacketSyncMachineFluid(tileEntity.getFluid()), player);
+                    }
+                }
+            }
         }
     }
 
@@ -53,5 +67,14 @@ public class ContainerBarrel extends Container implements IMachineStateContainer
     @Override
     public void sync(int... fluids) {
         this.tileEntity.setClientFluidAmount(fluids[0]);
+    }
+
+    @Override
+    public void sync(FluidStack fluidStack) {
+        if (fluidStack.amount == 0) {
+            this.tileEntity.setClientFluid(null);
+        } else {
+            this.tileEntity.setClientFluid(fluidStack);
+        }
     }
 }

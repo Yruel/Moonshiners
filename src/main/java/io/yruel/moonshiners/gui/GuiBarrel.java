@@ -20,16 +20,25 @@ import java.util.List;
 public class GuiBarrel extends GuiContainer {
     private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.ID + ":textures/gui/barrel.png");
     private final TileEntityBarrel tileEntity;
+    private final InventoryPlayer player;
 
-    protected Rectangle fluidBar = new Rectangle(36, 12, 16, 60);
+    protected Rectangle fluidBar = new Rectangle(71, 12, 16, 60);
 
     public GuiBarrel(InventoryPlayer player, TileEntityBarrel tileEntity) {
         super(new ContainerBarrel(player, tileEntity));
         this.tileEntity = tileEntity;
+        this.player = player;
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        this.fontRenderer.drawString("Barrel", 8, 6, 4210752);
+        this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+        this.fontRenderer.drawString("100%", 105, 40, 4210752);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(TEXTURES);
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
@@ -38,13 +47,24 @@ public class GuiBarrel extends GuiContainer {
 
         if (this.isPointInRegion(fluidBar.x, fluidBar.y, fluidBar.width, fluidBar.height, mouseX, mouseY)) {
             List<String> inputFluid = new ArrayList<>();
+            if (tileEntity.getClientFluid() != null) {
+                inputFluid.add(tileEntity.getClientFluid().getLocalizedName());
+            } else {
+                inputFluid.add("<Empty>");
+            }
+
             inputFluid.add(tileEntity.getClientFluidAmount() + " / " + tileEntity.tank.getCapacity() + " MB");
             GuiUtils.drawHoveringText(inputFluid, mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
         }
     }
 
     private void renderFluid() {
-        Fluid fluid = FluidRegistry.WATER;
+        Fluid fluid;
+        if (tileEntity.getClientFluid() != null) {
+            fluid = tileEntity.getClientFluid().getFluid();
+        } else {
+            fluid = FluidRegistry.WATER;
+        }
         TextureAtlasSprite fluidTexture = mc.getTextureMapBlocks().getTextureExtry(fluid.getStill().toString());
         mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         int fluidHeightIn = (int) ((double) (tileEntity.getClientFluidAmount()) / (double) (tileEntity.tank.getCapacity()) * fluidBar.height);
