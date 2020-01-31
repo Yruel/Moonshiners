@@ -33,12 +33,13 @@ public class GuiBarrel extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         this.fontRenderer.drawString("Barrel", 8, 6, 4210752);
+        int percentage = (tileEntity.getClientCookTime() / 200) * 100;
+        this.fontRenderer.drawString(Integer.toString(percentage) + " %", 105, 40, 4210752);
         this.fontRenderer.drawString(this.player.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        this.fontRenderer.drawString("100%", 105, 40, 4210752);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(TEXTURES);
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);

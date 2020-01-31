@@ -2,6 +2,7 @@ package io.yruel.moonshiners.container;
 
 import io.yruel.moonshiners.tileentity.TileEntityBarrel;
 import io.yruel.moonshiners.util.interfaces.IMachineStateContainer;
+import io.yruel.moonshiners.util.network.PacketSyncMachineCookTime;
 import io.yruel.moonshiners.util.network.PacketSyncMachineFluid;
 import io.yruel.moonshiners.util.network.PacketSyncMachineState;
 import io.yruel.moonshiners.util.network.ModPacketHandler;
@@ -56,12 +57,28 @@ public class ContainerBarrel extends Container implements IMachineStateContainer
                     }
                 }
             }
+
+            if(tileEntity.getCookTime() != tileEntity.getClientCookTime()) {
+                tileEntity.setClientCookTime(tileEntity.getCookTime());
+
+                for (IContainerListener listener: listeners) {
+                    if (listener instanceof EntityPlayerMP) {
+                        EntityPlayerMP player = (EntityPlayerMP) listener;
+                        ModPacketHandler.INSTANCE.sendTo(new PacketSyncMachineCookTime(tileEntity.getCookTime()), player);
+                    }
+                }
+            }
         }
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return this.tileEntity.isUsableByPlayer(playerIn);
+    }
+
+    @Override
+    public void sync(int cookTime) {
+        this.tileEntity.setClientCookTime(cookTime);
     }
 
     @Override

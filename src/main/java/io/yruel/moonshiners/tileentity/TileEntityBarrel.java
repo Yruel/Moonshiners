@@ -1,6 +1,7 @@
 package io.yruel.moonshiners.tileentity;
 
-import io.yruel.moonshiners.util.interfaces.IRestorableTileEntity;
+import io.yruel.moonshiners.block.BlockBarrel;
+import io.yruel.moonshiners.init.MoonshinersFluids;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,20 +16,34 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.awt.*;
 
-public class TileEntityBarrel extends TileEntity implements ITickable, IRestorableTileEntity {
+public class TileEntityBarrel extends TileEntity implements ITickable /*IRestorableTileEntity*/ {
 
     public FluidTank tank = new FluidTank(4000);
     private int clientAmountIn = -1;
     private FluidStack clientFluid;
+    private int clientCookTime;
+
+    private int cookTime;
+    private int totalCookTime = 200;
 
     @Override
     public void update() {
-/*        if (this.inputTank.getFluidAmount() > 0 && this.inputTank.getFluid() != null) {
-            this.outputTank.fill(new FluidStack(this.inputTank.getFluid().getFluid(), 1), true);
-            this.inputTank.drain(1, true);
-        }*/
+        if (!this.world.getBlockState(this.pos).getValue(BlockBarrel.OPEN) && this.tank.getFluid() != null && this.canFerment(this.tank.getFluid().getFluid())) {
+            cookTime++;
+            if (this.cookTime == totalCookTime) {
+                this.cookTime = 0;
+                this.totalCookTime = 200;
+                if (this.tank.getFluid().getFluid() == MoonshinersFluids.FLUID_POTATO_MASH) {
+                    this.tank.setFluid(new FluidStack(MoonshinersFluids.FLUID_FERMENTED_POTATO_MASH, this.tank.getFluidAmount()));
+                }
+                this.markDirty();
+            }
+        }
+    }
+
+    private boolean canFerment(Fluid fluid) {
+        return fluid == MoonshinersFluids.FLUID_POTATO_MASH;
     }
 
     @Override
@@ -54,7 +69,7 @@ public class TileEntityBarrel extends TileEntity implements ITickable, IRestorab
         return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64.0D;
     }
 
-    @Override
+/*    @Override
     public void readRestorableFromNBT(NBTTagCompound compound) {
         this.tank.readFromNBT(compound.getCompoundTag("inputTank"));
     }
@@ -62,7 +77,7 @@ public class TileEntityBarrel extends TileEntity implements ITickable, IRestorab
     @Override
     public void writeRestorableFromNBT(NBTTagCompound compound) {
         compound.setTag("inputTank", tank.writeToNBT(new NBTTagCompound()));
-    }
+    }*/
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -115,5 +130,17 @@ public class TileEntityBarrel extends TileEntity implements ITickable, IRestorab
 
     public FluidStack getFluid() {
         return tank.getFluid();
+    }
+
+    public int getCookTime() {
+        return this.cookTime;
+    }
+
+    public int getClientCookTime() {
+        return this.clientCookTime;
+    }
+
+    public void setClientCookTime(int cookTime) {
+        this.clientCookTime = cookTime;
     }
 }

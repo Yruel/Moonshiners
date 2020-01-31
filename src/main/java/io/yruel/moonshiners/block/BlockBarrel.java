@@ -1,7 +1,6 @@
 package io.yruel.moonshiners.block;
 
 import io.yruel.moonshiners.Moonshiners;
-import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersFluids;
 import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.tileentity.TileEntityBarrel;
@@ -31,7 +30,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
-import org.lwjgl.Sys;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -76,6 +74,9 @@ public class BlockBarrel extends BlockBase {
     @ParametersAreNonnullByDefault
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, te, stack);
+        if (!state.getValue(OPEN)) {
+            worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.COVER, 1)));
+        }
         worldIn.setBlockToAir(pos);
     }
 
@@ -154,24 +155,13 @@ public class BlockBarrel extends BlockBase {
         }
     }
 
-    public static void setState(boolean active, World worldIn, BlockPos pos) {
-        IBlockState state = worldIn.getBlockState(pos);
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
-
-        if (active) {
-            worldIn.setBlockState(pos, MoonshinersBlocks.BARREL.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, MoonshinersBlocks.BARREL.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
+/*    @Override
+    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
+        super.onBlockDestroyedByPlayer(worldIn, pos, state);
+        if (!state.getValue(OPEN)) {
+            worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.COVER, 1)));
         }
-        else {
-            worldIn.setBlockState(pos, MoonshinersBlocks.BARREL.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
-            worldIn.setBlockState(pos, MoonshinersBlocks.BARREL.getDefaultState().withProperty(FACING, state.getValue(FACING)), 3);
-        }
-
-        if (tileEntity != null) {
-            tileEntity.validate();
-            worldIn.setTileEntity(pos, tileEntity);
-        }
-    }
+    }*/
 
     @Override
     public boolean hasTileEntity(IBlockState state) {
@@ -219,17 +209,5 @@ public class BlockBarrel extends BlockBase {
     @Override
     public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getIndex();
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public boolean isFullCube(IBlockState state) {
-        return false;
     }
 }
