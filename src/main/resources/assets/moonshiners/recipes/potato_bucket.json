@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:potato"
+    }
+  ],
+  "result": {
+    "item": "moonshiners:corn_seeds",
+    "count": 3
+  }
+}

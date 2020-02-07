@@ -6,7 +6,6 @@ import io.yruel.moonshiners.init.MoonshinersItems;
 import io.yruel.moonshiners.tileentity.TileEntityBarrel;
 import io.yruel.moonshiners.util.Reference;
 import io.yruel.moonshiners.util.fluid.FluidUtils;
-import io.yruel.moonshiners.util.interfaces.IRestorableTileEntity;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -21,11 +20,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
@@ -45,22 +42,6 @@ public class BlockBarrel extends BlockBase {
         super(name, Material.WOOD, 3.0F, 5.0F);
         setSoundType(SoundType.WOOD);
         setDefaultState(this.getBlockState().getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(OPEN, true));
-    }
-
-    @Override
-    @ParametersAreNonnullByDefault
-    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        TileEntity tileEntity = world.getTileEntity(pos);
-
-        if (tileEntity instanceof IRestorableTileEntity) {
-            ItemStack stack = new ItemStack(Item.getItemFromBlock(this));
-            NBTTagCompound tagCompound = new NBTTagCompound();
-            ((IRestorableTileEntity) tileEntity).writeRestorableFromNBT(tagCompound);
-            stack.setTagCompound(tagCompound);
-            drops.add(stack);
-        } else {
-            super.getDrops(drops, world, pos, state, fortune);
-        }
     }
 
     @Override
@@ -113,7 +94,7 @@ public class BlockBarrel extends BlockBase {
                 item.shrink(1);
                 worldIn.setBlockState(pos, state.withProperty(OPEN, false), 2);
                 return true;
-            } else if (tileEntity != null && !state.getValue(OPEN) && playerIn.isSneaking()) {
+            } else if (tileEntity != null && !state.getValue(OPEN) && playerIn.isSneaking() && !tileEntity.isFermenting()) {
                 worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.COVER, 1)));
                 worldIn.setBlockState(pos, state.withProperty(OPEN, true), 2);
                 return true;
@@ -122,20 +103,6 @@ public class BlockBarrel extends BlockBase {
             return true;
         }
         return true;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-
-        TileEntity tileEntity = worldIn.getTileEntity(pos);
-
-        if (tileEntity instanceof IRestorableTileEntity) {
-            NBTTagCompound compound = stack.getTagCompound();
-            if (compound != null) {
-                ((IRestorableTileEntity) tileEntity).readRestorableFromNBT(compound);
-            }
-        }
     }
 
     @Override
@@ -154,14 +121,6 @@ public class BlockBarrel extends BlockBase {
             worldIn.setBlockState(pos, state.withProperty(FACING, facing), 2);
         }
     }
-
-/*    @Override
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
-        super.onBlockDestroyedByPlayer(worldIn, pos, state);
-        if (!state.getValue(OPEN)) {
-            worldIn.spawnEntity(new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MoonshinersItems.COVER, 1)));
-        }
-    }*/
 
     @Override
     public boolean hasTileEntity(IBlockState state) {

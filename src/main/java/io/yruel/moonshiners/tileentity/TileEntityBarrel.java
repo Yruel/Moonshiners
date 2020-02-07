@@ -1,6 +1,7 @@
 package io.yruel.moonshiners.tileentity;
 
 import io.yruel.moonshiners.block.BlockBarrel;
+import io.yruel.moonshiners.init.MoonshinersBlocks;
 import io.yruel.moonshiners.init.MoonshinersFluids;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,25 +26,35 @@ public class TileEntityBarrel extends TileEntity implements ITickable /*IRestora
     private int clientCookTime;
 
     private int cookTime;
-    private int totalCookTime = 200;
+    private int totalCookTime = 600;
+
+    private boolean active = false;
 
     @Override
     public void update() {
-        if (!this.world.getBlockState(this.pos).getValue(BlockBarrel.OPEN) && this.tank.getFluid() != null && this.canFerment(this.tank.getFluid().getFluid())) {
-            cookTime++;
-            if (this.cookTime == totalCookTime) {
-                this.cookTime = 0;
-                this.totalCookTime = 200;
-                if (this.tank.getFluid().getFluid() == MoonshinersFluids.FLUID_POTATO_MASH) {
-                    this.tank.setFluid(new FluidStack(MoonshinersFluids.FLUID_FERMENTED_POTATO_MASH, this.tank.getFluidAmount()));
+        if (this.world.getBlockState(this.pos).getBlock() == MoonshinersBlocks.BARREL) {
+            if (!this.world.getBlockState(this.pos).getValue(BlockBarrel.OPEN) && this.tank.getFluid() != null && this.canFerment(this.tank.getFluid().getFluid())) {
+                this.active = true;
+                cookTime++;
+                if (this.cookTime == totalCookTime) {
+                    this.active = false;
+                    this.cookTime = 0;
+                    this.totalCookTime = 600;
+                    if (this.tank.getFluid().getFluid() == MoonshinersFluids.FLUID_POTATO_MASH) {
+                        this.tank.setFluid(new FluidStack(MoonshinersFluids.FLUID_FERMENTED_POTATO_MASH, this.tank.getFluidAmount()));
+                    }
+                    this.markDirty();
                 }
-                this.markDirty();
             }
         }
     }
 
     private boolean canFerment(Fluid fluid) {
         return fluid == MoonshinersFluids.FLUID_POTATO_MASH;
+    }
+
+    public boolean isFermenting() {
+        return this.active;
     }
 
     @Override
@@ -68,16 +79,6 @@ public class TileEntityBarrel extends TileEntity implements ITickable /*IRestora
     public boolean isUsableByPlayer(EntityPlayer playerIn) {
         return !isInvalid() && playerIn.getDistanceSq(pos.add(0.5D, 0.5D, 0.5D)) <= 64.0D;
     }
-
-/*    @Override
-    public void readRestorableFromNBT(NBTTagCompound compound) {
-        this.tank.readFromNBT(compound.getCompoundTag("inputTank"));
-    }
-
-    @Override
-    public void writeRestorableFromNBT(NBTTagCompound compound) {
-        compound.setTag("inputTank", tank.writeToNBT(new NBTTagCompound()));
-    }*/
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
